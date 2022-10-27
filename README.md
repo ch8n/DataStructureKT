@@ -1,2 +1,2 @@
-# LinkedListKt
-Kotlin Implementation of LinkedList Datastructure
+# DataStucture-KT
+Kotlin Implementation of Datastructure
