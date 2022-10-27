@@ -2,15 +2,19 @@ package com.github.ch8n.recursion
 
 
 fun main() {
-    val headSum: Int = recursion {
+    recursion {
         head {
-            sum()
+            repeat(5) {
+                println("head executed...$it")
+            }
         }
     }
 
-    val tailSum: Int = recursion {
+    recursion {
         tail {
-            sum()
+            repeat(5) {
+                println("tail executed...$it")
+            }
         }
     }
 }
