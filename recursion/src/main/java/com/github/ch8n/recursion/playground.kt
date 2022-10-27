@@ -1,7 +1,7 @@
 package com.github.ch8n.recursion
 
 
-fun main() {
+internal fun main() {
     // 6699 is recursive call limit for my device
 
     recursion {
