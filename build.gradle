@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-group = 'com.github.ch8n.linkedlistKt'
+group = 'com.github.ch8n.dataStructureKt'
 version = '1.0-SNAPSHOT'
 
 repositories {
