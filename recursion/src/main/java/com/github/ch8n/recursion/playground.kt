@@ -5,12 +5,7 @@ internal fun main() {
 
     val result = recursion {
         tail {
-            fibonacci(
-                first = 0,
-                second = 1,
-                target = 5,
-                inclusive = true
-            )
+            fibonacci(0,1,5,true)
         }
     }
 

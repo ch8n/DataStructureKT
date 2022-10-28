@@ -31,21 +31,34 @@ internal class TailRecursionImpl : TailRecursion {
         if (inclusive) {
             accumulator.add(first)
             accumulator.add(second)
+            if (target <= 2) {
+                return accumulator.take(target)
+            }
         }
 
-        if (target > 0) {
+        val _target = if (inclusive) target - 2 else target
+
+        if (_target > 0) {
             val sum = first + second
             accumulator.add(sum)
             accumulator.addAll(
                 fibonacci(
                     first = second,
                     second = sum,
-                    target = target - 1,
+                    target = _target - 1,
                     inclusive = false
                 )
             )
         }
+
         return accumulator
     }
 
+    override fun factorial(target: Int): Int {
+        return if (target > 1) {
+            target * factorial(target - 1)
+        } else {
+            1
+        }
+    }
 }
