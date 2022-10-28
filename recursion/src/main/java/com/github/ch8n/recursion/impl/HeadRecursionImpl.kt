@@ -10,4 +10,19 @@ internal class HeadRecursionImpl : HeadRecursion {
             action.invoke(currentStep)
         }
     }
+
+    override fun <T> List<T>.onEach(index: Int, action: (item: T) -> Unit) {
+        val currentIndex = lastIndex - index
+        if (currentIndex >= 0) {
+            onEach(index + 1, action)
+            action.invoke(get(currentIndex))
+        }
+    }
+
+    override fun <T> List<T>.onReversed(index: Int, action: (item: T) -> Unit) {
+        if (lastIndex - index >= 0) {
+            onReversed(index + 1, action)
+            action.invoke(get(index))
+        }
+    }
 }

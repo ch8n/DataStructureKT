@@ -10,4 +10,19 @@ internal class TailRecursionImpl : TailRecursion {
         }
     }
 
+    override fun <T> List<T>.onEach(index: Int, action: (item: T) -> Unit) {
+        if (index <= lastIndex) {
+            action.invoke(get(index))
+            onEach(index + 1, action)
+        }
+    }
+
+    override fun <T> List<T>.onReversed(index: Int, action: (item: T) -> Unit) {
+        val currentIndex = lastIndex - index
+        if (currentIndex >= 0) {
+            action.invoke(get(currentIndex))
+            onReversed(index + 1, action)
+        }
+    }
+
 }
