@@ -8,5 +8,6 @@ interface RecursiveOperation {
 }
 
 interface HeadRecursion : RecursiveOperation
-
-interface TailRecursion : RecursiveOperation
+interface TailRecursion : RecursiveOperation {
+    fun fibonacci(first: Int, second: Int, target: Int = 5, inclusive: Boolean = false): List<Int>
+}

@@ -25,4 +25,27 @@ internal class TailRecursionImpl : TailRecursion {
         }
     }
 
+    override fun fibonacci(first: Int, second: Int, target: Int, inclusive: Boolean): List<Int> {
+        val accumulator = mutableListOf<Int>()
+
+        if (inclusive) {
+            accumulator.add(first)
+            accumulator.add(second)
+        }
+
+        if (target > 0) {
+            val sum = first + second
+            accumulator.add(sum)
+            accumulator.addAll(
+                fibonacci(
+                    first = second,
+                    second = sum,
+                    target = target - 1,
+                    inclusive = false
+                )
+            )
+        }
+        return accumulator
+    }
+
 }

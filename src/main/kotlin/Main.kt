@@ -42,6 +42,16 @@ fun main(args: Array<String>) {
                 println("tail onReversed...$item")
             }
         }
+
+        val fibonacciSeries = tail {
+            fibonacci(
+                first = 0,
+                second = 1,
+                target = 5,
+                inclusive = true
+            )
+        }
+        println(fibonacciSeries)
     }
 
 

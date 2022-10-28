@@ -3,18 +3,16 @@ package com.github.ch8n.recursion
 
 internal fun main() {
 
-    recursion {
-        head {
-            listOf(1, 2, 3, 4, 5).onReversed { item ->
-                println("head onReversed...$item")
-            }
-        }
-
+    val result = recursion {
         tail {
-            listOf(1, 2, 3, 4, 5).onReversed { item ->
-                println("tail onReversed...$item")
-            }
+            fibonacci(
+                first = 0,
+                second = 1,
+                target = 5,
+                inclusive = true
+            )
         }
     }
 
+    println(result)
 }
