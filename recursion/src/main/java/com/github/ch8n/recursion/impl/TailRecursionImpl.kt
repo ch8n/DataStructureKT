@@ -61,4 +61,14 @@ internal class TailRecursionImpl : TailRecursion {
             1
         }
     }
+
+    override fun Int.power(times: Int): Int {
+        if (times == 0) {
+            return 1
+        }
+        if (times == 1) {
+            return this
+        }
+        return this * power(times - 1)
+    }
 }

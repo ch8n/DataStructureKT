@@ -6,6 +6,7 @@ interface RecursiveOperation {
     fun <T> List<T>.onEach(index: Int = 0, action: (item: T) -> Unit)
     fun <T> List<T>.onReversed(index: Int = 0, action: (item: T) -> Unit)
     fun factorial(target: Int): Int
+    fun Int.power(times: Int): Int
 }
 
 interface HeadRecursion : RecursiveOperation

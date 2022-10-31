@@ -27,12 +27,22 @@ internal class HeadRecursionImpl : HeadRecursion {
         }
     }
 
-    // 4 = 1 * 2 * 3 * 4
-   override fun factorial(target: Int): Int {
+    override fun factorial(target: Int): Int {
         if (target > 1) {
             return factorial(target - 1) * target
         }
         return 1
     }
 
+    /**
+     * 2 power 0 = 1
+     * 2 power 1 = 2
+     * 2 power 2 = 4 = 2 * 2
+     * 2 power 2 = 4 = 2 * 2 * 2
+     */
+    override fun Int.power(times: Int): Int {
+        if (times == 0) return 1
+        if (times == 1) return this
+        return power(times - 1) * this
+    }
 }
