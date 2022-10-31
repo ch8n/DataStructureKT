@@ -34,15 +34,17 @@ internal class HeadRecursionImpl : HeadRecursion {
         return 1
     }
 
-    /**
-     * 2 power 0 = 1
-     * 2 power 1 = 2
-     * 2 power 2 = 4 = 2 * 2
-     * 2 power 2 = 4 = 2 * 2 * 2
-     */
     override fun Int.power(times: Int): Int {
         if (times == 0) return 1
         if (times == 1) return this
         return power(times - 1) * this
+    }
+
+    override fun List<Int>.sum(step: Int): Int {
+        val currentIndex = lastIndex - step
+        if (currentIndex >= 0) {
+            return sum(step + 1) + get(currentIndex)
+        }
+        return 0
     }
 }

@@ -71,4 +71,20 @@ internal class TailRecursionImpl : TailRecursion {
         }
         return this * power(times - 1)
     }
+
+    /***
+     * <1,2,3,4,5>.sum(step=0) => 14
+     */
+    override fun <I, R> List<I>.accumulate(): R {
+        TODO()
+    }
+
+    override fun List<Int>.sum(step: Int): Int {
+        if (step <= lastIndex) {
+            return get(step) + sum(step + 1)
+        }
+        return 0
+    }
+
+
 }
