@@ -40,11 +40,12 @@ internal class HeadRecursionImpl : HeadRecursion {
         return power(times - 1) * this
     }
 
-    override fun List<Int>.sum(step: Int): Int {
+    override fun <I, R> List<I>.accumulate(initial: R, step: Int, operation: (acc: R, next: I) -> R): R {
         val currentIndex = lastIndex - step
-        if (currentIndex >= 0) {
-            return sum(step + 1) + get(currentIndex)
+        var accumulator = operation.invoke(initial, get(step))
+        if (currentIndex > 0) {
+            accumulator = accumulate(accumulator, step + 1, operation)
         }
-        return 0
+        return accumulator
     }
 }

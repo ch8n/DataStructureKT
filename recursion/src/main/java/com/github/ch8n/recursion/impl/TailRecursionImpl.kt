@@ -72,19 +72,13 @@ internal class TailRecursionImpl : TailRecursion {
         return this * power(times - 1)
     }
 
-    /***
-     * <1,2,3,4,5>.sum(step=0) => 14
-     */
-    override fun <I, R> List<I>.accumulate(): R {
-        TODO()
-    }
-
-    override fun List<Int>.sum(step: Int): Int {
+    override fun <I, R> List<I>.accumulate(initial: R, step: Int, operation: (acc: R, next: I) -> R): R {
+        var accumulator = initial
         if (step <= lastIndex) {
-            return get(step) + sum(step + 1)
+            accumulator = operation.invoke(accumulator, get(step))
+            return accumulate(accumulator, step + 1, operation)
         }
-        return 0
+        return accumulator
     }
-
 
 }

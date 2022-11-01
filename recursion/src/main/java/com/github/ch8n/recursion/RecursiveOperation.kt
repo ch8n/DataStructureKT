@@ -7,8 +7,7 @@ interface RecursiveOperation {
     fun <T> List<T>.onReversed(index: Int = 0, action: (item: T) -> Unit)
     fun factorial(target: Int): Int
     fun Int.power(times: Int): Int
-
-    fun List<Int>.sum(step: Int = 0): Int
+    fun <I, R> List<I>.accumulate(initial: R, step: Int = 0, operation: (acc: R, next: I) -> R): R
 }
 
 interface HeadRecursion : RecursiveOperation
@@ -21,5 +20,4 @@ interface TailRecursion : RecursiveOperation {
      * if inclusive true then first and second will be added to result
      * **/
     fun fibonacci(first: Int, second: Int, target: Int = 5, inclusive: Boolean = false): List<Int>
-    fun <I, R> List<I>.accumulate(): R
 }
