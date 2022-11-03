@@ -12,6 +12,10 @@ interface RecursiveOperation {
 
 interface HeadRecursion : RecursiveOperation
 
+interface MemoizationRecursion {
+    fun sumFibonacci(target: Int = 5, memory: Map<Int, Int> = emptyMap()): Int
+}
+
 interface TailRecursion : RecursiveOperation {
 
     /**

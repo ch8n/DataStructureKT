@@ -4,8 +4,12 @@ import com.github.ch8n.recursion.algo.TaylorSeries
 
 
 internal fun main() {
-    val ex = TaylorSeries()
-    println(ex.invoke(4, 10))
+
+    recursion {
+        memo {
+            println(sumFibonacci(7))
+        }
+    }
 
 }
 
