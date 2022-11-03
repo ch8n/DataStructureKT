@@ -2,6 +2,11 @@ package com.github.ch8n.recursion.algo
 
 import com.github.ch8n.recursion.ifZero
 
+
+// TODO
+//  taylor with Horners Rule
+//  Interative method
+//  update current to remove globals
 class TaylorSeries {
     // 3e^x
 
