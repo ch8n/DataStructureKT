@@ -19,29 +19,26 @@ interface FixedArrayOperations<T> : Iterable<T> {
 
 class FixedArray<T> private constructor(size: Int, initializer: (index: Int) -> T) : FixedArrayOperations<T> {
 
-    private val internalArray = buildMutableList {
-        repeat(size) {
-            add(initializer.invoke(it))
-        }
-    }
+    private val _array = Array(size) { initializer.invoke(it) as Any }
 
     companion object {
         fun <T> of(size: Int, initializer: (index: Int) -> T): FixedArray<T> = FixedArray(size, initializer)
     }
 
     private fun checkValidRange(index: Int) {
-        val isValidRange = index >= 0 && index <= internalArray.size
+        val isValidRange = index in 0.._array.lastIndex
         if (!isValidRange) {
             throw IndexOutOfBoundsException("Invalid index range!")
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun get(index: Int): T {
         checkValidRange(index)
-        return internalArray.get(index)
+        return _array.get(index) as T
     }
 
-    override val size: Int = internalArray.size
+    override val size: Int = _array.size
 
     override fun iterator(): Iterator<T> {
         return GenericIterator(size, ::get)
@@ -49,7 +46,7 @@ class FixedArray<T> private constructor(size: Int, initializer: (index: Int) -> 
 
     override fun set(index: Int, item: T) {
         checkValidRange(index)
-        internalArray.set(index, item)
+        _array.set(index, item as Any)
     }
 }
 

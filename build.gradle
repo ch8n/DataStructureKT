@@ -16,6 +16,8 @@ dependencies {
     // deploy - https://jitpack.io/#ch8n/DataStructureKT
     implementation(project(":linkedlist"))
     implementation(project(":recursion"))
+    implementation(project(":array"))
+    implementation(project(":dynamicArray"))
     //implementation("com.github.ch8n.DataStructureKT:linked-list-kt:0.0.1")
     //implementation("com.github.ch8n.DataStructureKT:recursion-kt:0.0.1")
     testImplementation 'org.jetbrains.kotlin:kotlin-test'

@@ -3,6 +3,6 @@ rootProject.name = 'LinkedListKt'
 
 include ':linkedlist'
 include ':recursion'
-include 'array'
-include 'array'
+include ':array'
+include ':dynamicArray'
 
