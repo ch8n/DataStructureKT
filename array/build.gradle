@@ -32,7 +32,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.kotlin
                 groupId = 'com.github.ch8n'
-                artifactId = 'array-kt'
+                artifactId = 'fixed-array-kt'
                 version = '0.1'
             }
         }
