@@ -62,7 +62,7 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
         }
     }
 
-    private fun expandedArray(expandFactor: Int = 2): Array<Any?> {
+    private fun getExpandedArray(expandFactor: Int = 2): Array<Any?> {
         val currentArray = _array
         val currentSize = 1.coerceAtLeast(currentArray.size)
         val expandedSize = currentSize * expandFactor
@@ -73,7 +73,7 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
         return expandedArray
     }
 
-    private fun shrunkArray(shrinkFactor: Int = 2): Array<Any?> {
+    private fun getShrunkArray(shrinkFactor: Int = 2): Array<Any?> {
         val currentArray = _array
         val currentSize = currentArray.size
         val shrinkSize = currentSize / shrinkFactor
@@ -88,8 +88,7 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
     @Suppress("UNCHECKED_CAST")
     override fun get(index: Int): T {
         checkIndexBounds(index)
-        val targetItem = _array.get(index) ?: throw NullPointerException("Item null at index $index")
-        return targetItem as T
+        return (_array.get(index) as? T) ?: throw NullPointerException("Item null at index $index")
     }
 
     override fun set(index: Int, item: T) {
@@ -120,7 +119,7 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
 
         val isExpandRequired = isArrayLimitReached(_numberOfElements + 1, _array.size)
         if (isExpandRequired) {
-            val expandedArray = expandedArray()
+            val expandedArray = getExpandedArray()
             _array = expandedArray
         }
 
@@ -149,7 +148,7 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
 
         val isShrinkRequired = isSurplusMemoryInArray(_numberOfElements, _array.size)
         if (isShrinkRequired) {
-            _array = shrunkArray()
+            _array = getShrunkArray()
         }
         return targetItem as T
     }
@@ -158,7 +157,7 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
     override fun add(item: T) {
         val isLimitReached = isArrayLimitReached(_numberOfElements, _array.size)
         if (isLimitReached) {
-            val expandedArray = expandedArray()
+            val expandedArray = getExpandedArray()
             _array = expandedArray
         }
         _array.set(_numberOfElements, item)

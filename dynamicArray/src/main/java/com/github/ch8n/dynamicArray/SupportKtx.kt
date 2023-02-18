@@ -1,9 +1,5 @@
 package com.github.ch8n.dynamicArray
 
-inline fun <T> buildMutableList(operation: MutableList<T>.() -> Unit): MutableList<T> =
-    buildList(operation).toMutableList()
-
-
 class GenericIterator<T>(
     private val iterableSize: Int,
     private val getItemAt: (index: Int) -> T
