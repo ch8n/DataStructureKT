@@ -24,12 +24,12 @@ interface DynamicArrayOperations<T> : Iterable<T> {
     /**
      * Inserts the given value at the given index in the array, shifting all subsequent elements to the right. If the underlying array is full, a new, larger array is created and the existing elements are copied into it.
      */
-    fun insert(index: Int, value: T)
+    fun insert(targetIndex: Int, item: T)
 
     /**
      * Removes the element at the given index from the array, shifting all subsequent elements to the left. If the number of elements in the array is less than half the size of the underlying array, a new, smaller array is created and the existing elements are copied into it.
      */
-    fun remove(index: Int): T
+    fun remove(targetIndex: Int): T
 
     /**
      * Returns the number of elements in the array.
@@ -47,23 +47,16 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
 
     private var _array = arrayOfNulls<Any>(initialCapacity)
 
-    private fun checkArrayLimitReached(): Boolean {
-        val numberOfItems = size
-        val currentArraySize = _array.size
-        val isExpandRequired = numberOfItems == currentArraySize
-        return isExpandRequired
+    private fun isArrayLimitReached(itemsInArray: Int, totalSizeOfArray: Int): Boolean {
+        return itemsInArray == totalSizeOfArray
     }
 
-    private fun checkArrayUnncessayMemory(): Boolean {
-        val numberOfItems = size
-        val currentArraySize = _array.size
-        val isShrinkRequired = numberOfItems <= currentArraySize / 2
-        return isShrinkRequired
+    private fun isSurplusMemoryInArray(itemsInArray: Int, totalSizeOfArray: Int): Boolean {
+        return itemsInArray <= totalSizeOfArray / 2
     }
 
     private fun checkIndexBounds(index: Int) {
-        val lastIndex = size - 1
-        val isValidRange = index in 0..lastIndex
+        val isValidRange = index in 0.._numberOfElements
         if (!isValidRange) {
             throw IndexOutOfBoundsException("Invalid index range!")
         }
@@ -85,7 +78,8 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
         val currentSize = currentArray.size
         val shrinkSize = currentSize / shrinkFactor
         val shrinkArray = arrayOfNulls<Any>(shrinkSize)
-        for (index in currentArray.indices) {
+        val lastIndex = _numberOfElements - 1
+        for (index in 0..lastIndex) {
             shrinkArray.set(index, currentArray.get(index))
         }
         return shrinkArray
@@ -98,7 +92,12 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
         return targetItem as T
     }
 
-    override val size: Int
+    override fun set(index: Int, item: T) {
+        checkIndexBounds(index)
+        _array.set(index, item)
+    }
+
+    private val _numberOfElements: Int
         get() {
             var count = 0
             for (index in _array.indices) {
@@ -107,32 +106,64 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
             }
             return count
         }
+    override val size: Int get() = _numberOfElements
 
     override fun isEmpty(): Boolean = size == 0
 
-    override fun insert(index: Int, value: T) {
-        TODO("Not yet implemented")
+    override fun insert(targetIndex: Int, item: T) {
+        checkIndexBounds(targetIndex)
+
+        if (isEmpty()) {
+            add(item)
+            return
+        }
+
+        val isExpandRequired = isArrayLimitReached(_numberOfElements + 1, _array.size)
+        if (isExpandRequired) {
+            val expandedArray = expandedArray()
+            _array = expandedArray
+        }
+
+        val lastIndex = _numberOfElements - 1
+        for (index in lastIndex downTo targetIndex) {
+            _array.set(index + 1, get(index))
+        }
+
+        _array.set(targetIndex, item)
     }
 
-    override fun remove(index: Int): T {
-        TODO("Not yet implemented")
+    @Suppress("UNCHECKED_CAST")
+    override fun remove(targetIndex: Int): T {
+        checkIndexBounds(targetIndex)
+        if (isEmpty()) throw IndexOutOfBoundsException("empty array!")
+
+        val targetItem = _array.get(targetIndex)
+        val lastIndex = _numberOfElements - 1
+        val secondLastIndex = lastIndex - 1
+        for (index in targetIndex..secondLastIndex) {
+            val nextItem = get(index + 1)
+            _array.set(index, nextItem)
+        }
+
+        _array.set(lastIndex, null)
+
+        val isShrinkRequired = isSurplusMemoryInArray(_numberOfElements, _array.size)
+        if (isShrinkRequired) {
+            _array = shrunkArray()
+        }
+        return targetItem as T
     }
 
 
     override fun add(item: T) {
-        val isLimitReached = checkArrayLimitReached()
+        val isLimitReached = isArrayLimitReached(_numberOfElements, _array.size)
         if (isLimitReached) {
             val expandedArray = expandedArray()
             _array = expandedArray
         }
-        val lastIndex = if (isEmpty()) 0 else size - 1
-        _array.set(lastIndex, item)
+        _array.set(_numberOfElements, item)
     }
 
-    override fun set(index: Int, item: T) {
-        checkIndexBounds(index)
-        _array.set(index, item)
-    }
 
     override fun iterator(): Iterator<T> {
         return GenericIterator(size, ::get)
