@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/dynamicArray" />
             <option value="$PROJECT_DIR$/linkedlist" />
             <option value="$PROJECT_DIR$/recursion" />
+            <option value="$PROJECT_DIR$/stringBuffer" />
           </set>
         </option>
       </GradleProjectSettings>
