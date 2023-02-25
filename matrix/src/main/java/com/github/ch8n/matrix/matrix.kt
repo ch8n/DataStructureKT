@@ -6,20 +6,28 @@ package com.github.ch8n.matrix
  * it can only set and get data from array
  */
 interface MatrixOperations<T> : Iterable<T> {
-    val rows: Int
-    val columns: Int
+    val rowsCount: Int
+    val columnsCount: Int
+    fun rows(row: Int): Array<T>
+    fun columns(columns: Int): Array<T>
     fun get(row: Int, col: Int): T
     fun set(row: Int, col: Int, value: T)
+
+    // advance
+    fun plus(matrix: Matrix<T>)
+    fun minus(matrix: Matrix<T>)
+    fun cross(matrix: Matrix<T>)
+    fun dot(matrix: Matrix<T>)
 }
 
-val <T> MatrixOperations<T>.size get() = Pair(rows, columns)
+val <T> MatrixOperations<T>.size get() = Pair(rowsCount, columnsCount)
 
 class Matrix<T> private constructor(
-    override val rows: Int, override val columns: Int, initializer: (row: Int, col: Int) -> T
+    override val rowsCount: Int, override val columnsCount: Int, initializer: (row: Int, col: Int) -> T
 ) : MatrixOperations<T> {
 
-    private val matrix = Array(rows) { rowIndex ->
-        Array(columns) { columnIndex ->
+    private val matrix = Array(rowsCount) { rowIndex ->
+        Array(columnsCount) { columnIndex ->
             initializer.invoke(rowIndex, columnIndex) as Any
         }
     }
@@ -29,14 +37,38 @@ class Matrix<T> private constructor(
             Matrix(rows, columns, initializer)
     }
 
+    override fun rows(row: Int): Array<T> {
+        TODO("Not yet implemented")
+    }
+
+    override fun columns(columns: Int): Array<T> {
+        TODO("Not yet implemented")
+    }
+
     override fun get(row: Int, col: Int): T {
+        TODO("Not yet implemented")
+    }
+
+    override fun dot(matrix: Matrix<T>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun cross(matrix: Matrix<T>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun minus(matrix: Matrix<T>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun plus(matrix: Matrix<T>) {
         TODO("Not yet implemented")
     }
 
     override fun iterator(): Iterator<T> {
         return MatrixIterator(
-            rows = rows,
-            columns = columns,
+            rows = rowsCount,
+            columns = columnsCount,
             getItemAt = ::get
         )
     }
