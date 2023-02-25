@@ -18,6 +18,8 @@ interface MatrixOperations<T> : Iterable<T> {
     fun minus(matrix: Matrix<T>)
     fun cross(matrix: Matrix<T>)
     fun dot(matrix: Matrix<T>)
+    fun transpose(matrix: Matrix<T>)
+    fun inverse(matrix: Matrix<T>)
 }
 
 val <T> MatrixOperations<T>.size get() = Pair(rowsCount, columnsCount)
@@ -46,6 +48,14 @@ class Matrix<T> private constructor(
     }
 
     override fun get(row: Int, col: Int): T {
+        TODO("Not yet implemented")
+    }
+
+    override fun inverse(matrix: Matrix<T>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun transpose(matrix: Matrix<T>) {
         TODO("Not yet implemented")
     }
 
