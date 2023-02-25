@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/array" />
             <option value="$PROJECT_DIR$/dynamicArray" />
             <option value="$PROJECT_DIR$/linkedlist" />
+            <option value="$PROJECT_DIR$/matrix" />
             <option value="$PROJECT_DIR$/recursion" />
             <option value="$PROJECT_DIR$/stringBuffer" />
           </set>

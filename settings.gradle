@@ -6,4 +6,5 @@ include ':recursion'
 include ':array'
 include ':dynamicArray'
 include ':stringBuffer'
+include ':matrix'
 
