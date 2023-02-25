@@ -43,7 +43,7 @@ interface DynamicArrayOperations<T> : Iterable<T> {
 
 }
 
-class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations<T> {
+class DynamicArray<T> constructor(initialCapacity: Int = 0) : DynamicArrayOperations<T> {
 
     private var _array = arrayOfNulls<Any>(initialCapacity)
 
@@ -134,7 +134,7 @@ class DynamicArray<T> constructor(initialCapacity: Int) : DynamicArrayOperations
     @Suppress("UNCHECKED_CAST")
     override fun remove(targetIndex: Int): T {
         checkIndexBounds(targetIndex)
-        if (isEmpty()) throw IndexOutOfBoundsException("empty array!")
+        if (isEmpty()) throw IndexOutOfBoundsException("already empty array!")
 
         val targetItem = _array.get(targetIndex)
         val lastIndex = _numberOfElements - 1

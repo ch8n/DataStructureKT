@@ -7,7 +7,7 @@ package com.github.ch8n.stdlib
  * (Note: If implementing in Java,please use a character array so that you can perform this operation in place.)
  */
 private fun main() {
-    println("  Mr John Smith   ".toUrlEncoded())
+    println(" Mr John Smith   ".toUrlEncoded())
     println("  Mr John Smith   ".toUrlEncoded1())
     println("  Mr John Smith   ".toUrlEncoded2())
 }
@@ -30,6 +30,7 @@ fun String.toUrlEncoded(): String {
 
 fun String.toUrlEncoded2(): String {
     val input = this
+
     // split whitespace from start
     var startIndex = 0
     for (index in input.indices) {
@@ -38,6 +39,7 @@ fun String.toUrlEncoded2(): String {
         }
         startIndex += 1
     }
+
     // split whitespace from end
     var endIndex = input.lastIndex
     for (index in input.lastIndex downTo startIndex) {
@@ -46,6 +48,7 @@ fun String.toUrlEncoded2(): String {
         }
         endIndex -= 1
     }
+
     // replace internal whitespace with %20
     val updated = buildString {
         for (index in startIndex..endIndex) {
