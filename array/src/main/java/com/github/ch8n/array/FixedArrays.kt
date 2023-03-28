@@ -5,7 +5,7 @@ package com.github.ch8n.array
  * Fixed array doesn't have ability to add or remove elements
  * it can only set and get data from array
  */
-interface FixedArrayOperations<T> : Iterable<T> {
+interface StaticArrayOperations<T> : Iterable<T> {
 
     // returns element at given index
     fun get(index: Int): T
@@ -17,12 +17,12 @@ interface FixedArrayOperations<T> : Iterable<T> {
     val size: Int
 }
 
-class FixedArray<T> private constructor(size: Int, initializer: (index: Int) -> T) : FixedArrayOperations<T> {
+class StaticArray<T> private constructor(size: Int, initializer: (index: Int) -> T) : StaticArrayOperations<T> {
 
     private val _array = Array(size) { initializer.invoke(it) as Any }
 
     companion object {
-        fun <T> of(size: Int, initializer: (index: Int) -> T): FixedArray<T> = FixedArray(size, initializer)
+        fun <T> of(size: Int, initializer: (index: Int) -> T): StaticArray<T> = StaticArray(size, initializer)
     }
 
     private fun checkValidRange(index: Int) {
@@ -50,7 +50,7 @@ class FixedArray<T> private constructor(size: Int, initializer: (index: Int) -> 
     }
 }
 
-fun <T> fixedArrayOf(size: Int, initializer: (index: Int) -> T): FixedArray<T> =
-    FixedArray.of(size, initializer)
+fun <T> staticArrayOf(size: Int, initializer: (index: Int) -> T): StaticArray<T> =
+    StaticArray.of(size, initializer)
 
-fun <T> fixedArrayOf(vararg items: T) = FixedArray.of(items.size, items::get)
+fun <T> staticArrayOf(vararg items: T) = StaticArray.of(items.size, items::get)
