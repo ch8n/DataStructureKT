@@ -10,3 +10,24 @@ fun <T> StaticArrayOperations<T>.linearSearch(targetValue: T): Int {
     }
     return -1
 }
+
+fun StaticArrayOperations<Int>.binarySearch(targetValue: Int, startIndex: Int = 0, endIndex: Int = size - 1): Int {
+    if (startIndex > endIndex) return -1
+
+    val mid = (startIndex + endIndex) / 2
+    return when {
+        get(mid) == targetValue -> mid
+
+        get(mid) > targetValue -> binarySearch(
+            targetValue = targetValue,
+            startIndex = startIndex,
+            endIndex = mid - 1
+        )
+
+        else -> binarySearch(
+            targetValue = targetValue,
+            startIndex = mid + 1,
+            endIndex = endIndex
+        )
+    }
+}
