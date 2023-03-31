@@ -15,6 +15,9 @@ interface StaticArrayOperations<T> : Iterable<T> {
 
     // number of elements in array
     val size: Int
+
+    // index of last element
+    val lastIndex: Int
 }
 
 class StaticArray<T> private constructor(size: Int, initializer: (index: Int) -> T) : StaticArrayOperations<T> {
@@ -39,6 +42,9 @@ class StaticArray<T> private constructor(size: Int, initializer: (index: Int) ->
     }
 
     override val size: Int = _array.size
+
+    override val lastIndex: Int
+        get() = size - 1
 
     override fun iterator(): Iterator<T> {
         return GenericIterator(size, ::get)

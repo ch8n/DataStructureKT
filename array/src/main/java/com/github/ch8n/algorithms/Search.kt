@@ -11,7 +11,13 @@ fun <T> StaticArrayOperations<T>.linearSearch(targetValue: T): Int {
     return -1
 }
 
-fun StaticArrayOperations<Int>.binarySearch(targetValue: Int, startIndex: Int = 0, endIndex: Int = size - 1): Int {
+
+/**
+ * BinarySearch Complexity -->
+ * worse -> O(log(n))
+ * best -> O(1)
+ */
+fun StaticArrayOperations<Int>.binarySearch(targetValue: Int, startIndex: Int = 0, endIndex: Int = lastIndex): Int {
     if (startIndex > endIndex) return -1
 
     val mid = (startIndex + endIndex) / 2
