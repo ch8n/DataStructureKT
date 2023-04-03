@@ -67,4 +67,12 @@ internal fun main() {
         """.trimIndent()
     )
 
+    println(
+        """
+            current -> ${staticArray.joinToString()}
+            reverse(In Place 2) -> ${staticArray.reverseInPlace2()}
+            current -> ${staticArray.joinToString()}
+        """.trimIndent()
+    )
+
 }
