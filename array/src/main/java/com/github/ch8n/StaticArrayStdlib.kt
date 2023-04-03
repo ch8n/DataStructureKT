@@ -56,6 +56,18 @@ fun <T> StaticArray<T>.reverseInPlace2() {
     }
 }
 
+fun <T> StaticArray<T>.shiftRight(times: Int = 2) {
+    repeat(times){
+        var temp: T = get(lastIndex)
+        for (index in lastIndex downTo 1) {
+            val secondLast = get(index - 1)
+            set(index - 1, temp)
+            temp = secondLast
+        }
+        set(lastIndex, temp)
+    }
+}
+
 
 fun StaticArray<Int>.sum(): Int = fold(0) { total, item ->
     return@fold total + item
