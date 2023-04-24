@@ -57,7 +57,7 @@ fun <T> StaticArray<T>.reverseInPlace2() {
 }
 
 fun <T> StaticArray<T>.shiftRight(times: Int = 2) {
-    repeat(times){
+    repeat(times) {
         var temp: T = get(lastIndex)
         for (index in lastIndex downTo 1) {
             val secondLast = get(index - 1)
@@ -78,4 +78,32 @@ fun StaticArray<Int>.average(): Float {
     return sum() / size.toFloat()
 }
 
+fun StaticArray<Int>.isAscendingSorted(): Boolean {
+    var lastItem = last()
+    for (index in lastIndex - 1 downTo 0) {
+        val previous = get(index)
+        if (previous > lastItem) {
+            return false
+        }
+        lastItem = previous
+    }
+    return true
+}
+
+
+fun StaticArray<Int>.isDescendingSorted(): Boolean {
+    var firstItem = first()
+    for (index in 1..lastIndex) {
+        val next = get(index)
+        if (firstItem < next) {
+            return false
+        }
+        firstItem = next
+    }
+    return true
+}
+
+fun <T> StaticArray<T>.merge(that: StaticArray<T>): StaticArray<T> {
+    return staticArrayOf()
+}
 

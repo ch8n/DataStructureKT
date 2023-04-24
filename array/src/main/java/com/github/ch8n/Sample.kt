@@ -83,4 +83,22 @@ internal fun main() {
         """.trimIndent()
     )
 
+    println(
+        """
+            new -> ${staticArrayOf(1, 2, 3, 4, 5).joinToString()}
+            isAscendingSorted -> ${staticArrayOf(1, 2, 3, 4, 5).isAscendingSorted()}
+            isDescendingSorted -> ${staticArrayOf(1, 2, 3, 4, 5).isDescendingSorted()}
+            isAscendingSorted -> ${staticArrayOf(5, 4, 3, 2, 1).isAscendingSorted()}
+            isDescendingSorted -> ${staticArrayOf(5, 4, 3, 2, 1).isDescendingSorted()}
+        """.trimIndent()
+    )
+
+    println(
+        """
+            list1 -> ${staticArrayOf(1, 2, 3).joinToString()}
+            list2 -> ${staticArrayOf(4, 5, 6).joinToString()}
+            merged -> ${staticArrayOf(1, 2, 3).merge(staticArrayOf(4, 5, 6)).joinToString()}
+        """.trimIndent()
+    )
+
 }
