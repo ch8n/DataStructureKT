@@ -103,7 +103,24 @@ fun StaticArray<Int>.isDescendingSorted(): Boolean {
     return true
 }
 
-fun <T> StaticArray<T>.merge(that: StaticArray<T>): StaticArray<T> {
-    return staticArrayOf()
+fun StaticArray<Int>.shiftPositiveRight() {
+    var negativeIndex = 0
+    var positiveIndex = lastIndex
+
+    fun StaticArray<Int>.swap(fromIndex: Int, toIndex: Int) {
+        val first = get(fromIndex)
+        val second = get(toIndex)
+        set(toIndex, first)
+        set(fromIndex, second)
+    }
+
+    while (negativeIndex < positiveIndex) {
+        while (get(negativeIndex) < 0) negativeIndex++
+        while (get(positiveIndex) > 0) positiveIndex--
+        if (negativeIndex < positiveIndex) {
+            swap(negativeIndex, positiveIndex)
+        }
+    }
 }
+
 

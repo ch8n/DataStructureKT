@@ -88,6 +88,7 @@ internal fun main() {
             new -> ${staticArrayOf(1, 2, 3, 4, 5).joinToString()}
             isAscendingSorted -> ${staticArrayOf(1, 2, 3, 4, 5).isAscendingSorted()}
             isDescendingSorted -> ${staticArrayOf(1, 2, 3, 4, 5).isDescendingSorted()}
+            new -> ${staticArrayOf(5, 4, 3, 2, 1).joinToString()}
             isAscendingSorted -> ${staticArrayOf(5, 4, 3, 2, 1).isAscendingSorted()}
             isDescendingSorted -> ${staticArrayOf(5, 4, 3, 2, 1).isDescendingSorted()}
         """.trimIndent()
@@ -95,9 +96,26 @@ internal fun main() {
 
     println(
         """
-            list1 -> ${staticArrayOf(1, 2, 3).joinToString()}
-            list2 -> ${staticArrayOf(4, 5, 6).joinToString()}
-            merged -> ${staticArrayOf(1, 2, 3).merge(staticArrayOf(4, 5, 6)).joinToString()}
+            list -> ${staticArrayOf(-1, 2, 5, -3, 6, 7).joinToString()}
+            shift positive right -> ${
+            staticArrayOf(-1, 2, 5, -3, 6, 7).let {
+                it.shiftPositiveRight()
+                it.joinToString()
+            }
+        }
+        """.trimIndent()
+    )
+
+
+    println(
+        """
+            list -> ${staticArrayOf(-1, 2, 0, -3, 0, 7).joinToString()}
+            shift positive right -> ${
+            staticArrayOf(-1, 2, 0, -3, 0, 7).let {
+                it.shiftPositiveRight()
+                it.joinToString()
+            }
+        }
         """.trimIndent()
     )
 
