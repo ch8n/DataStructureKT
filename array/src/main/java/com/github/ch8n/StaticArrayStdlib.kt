@@ -1,5 +1,7 @@
 package com.github.ch8n
 
+import com.github.ch8n.algorithms.binarySearch
+import com.github.ch8n.algorithms.linearSearch
 import com.github.ch8n.array.StaticArray
 import com.github.ch8n.array.staticArrayOf
 
@@ -138,4 +140,144 @@ fun StaticArray<Int>.merge(that: StaticArray<Int>): StaticArray<Int> {
 }
 
 
+fun StaticArray<Int>.mergeSorted(that: StaticArray<Int>): StaticArray<Int> {
+    var ptrList1 = 0
+    var ptrList2 = 0
+    val merged = staticArrayOf(this.size + that.size) { -1 }
+    var current = 0
+    while (ptrList1 < this.lastIndex || ptrList2 < that.lastIndex) {
+        when {
+            this.get(ptrList1) < that.get(ptrList2) -> {
+                merged.set(current, this.get(ptrList1))
+                current++
+                ptrList1++
+            }
+
+            this.get(ptrList1) > that.get(ptrList2) -> {
+                merged.set(current, that.get(ptrList2))
+                current++
+                ptrList2++
+            }
+
+            this.get(ptrList1) == that.get(ptrList2) -> {
+                merged.set(current, this.get(ptrList1))
+                current++
+                ptrList1++
+                ptrList2++
+            }
+        }
+    }
+
+    for (index in ptrList1..this.lastIndex) {
+        merged.set(current, this.get(index))
+        current++
+    }
+
+    for (index in ptrList2..that.lastIndex) {
+        merged.set(current, that.get(index))
+        current++
+    }
+    return merged
+}
+
+
+fun StaticArray<Int>.union(that: StaticArray<Int>): StaticArray<Int> {
+    val merged = staticArrayOf<Int>(this.size + that.size) { -1 }
+    var current = 0
+
+    this.forEach {
+        merged.set(current, it)
+        current++
+    }
+
+    that.forEach {
+        // binary search require item to be sorted
+        if (merged.linearSearch(it) == -1) {
+            merged.set(current, it)
+            current++
+        }
+    }
+    return merged
+}
+
+
+fun StaticArray<Int>.unionSorted(that: StaticArray<Int>): StaticArray<Int> {
+    var ptr1 = 0
+    var ptr2 = 0
+    val union = staticArrayOf(this.size + that.size) { -1 }
+    var current = 0
+    while (ptr1 < this.lastIndex && ptr2 < that.lastIndex) {
+        when {
+            this.get(ptr1) < that.get(ptr2) -> {
+                if (union.binarySearch(this.get(ptr1)) == -1) {
+                    union.set(current, this.get(ptr1))
+                    current++
+                }
+                ptr1++
+            }
+
+            this.get(ptr1) > that.get(ptr2) -> {
+                if (union.binarySearch(that.get(ptr2)) == -1) {
+                    union.set(current, that.get(ptr2))
+                    current++
+                }
+                ptr2++
+            }
+
+            this.get(ptr1) == that.get(ptr2) -> {
+                if (union.binarySearch(that.get(ptr2)) == -1) {
+                    union.set(current, that.get(ptr2))
+                    current++
+                }
+                ptr1++
+                ptr2++
+            }
+        }
+    }
+
+    for (index in ptr1..this.lastIndex) {
+        union.set(current, this.get(index))
+        current++
+    }
+
+    for (index in ptr2..that.lastIndex) {
+        union.set(current, that.get(index))
+        current++
+    }
+
+    return union
+}
+
+
+fun StaticArray<Int>.intersection(that: StaticArray<Int>): StaticArray<Int> {
+    val intersection = staticArrayOf(this.size + that.size) { -1 }
+    var current = 0
+    this.forEach {
+        if (that.linearSearch(it) != -1) {
+            intersection.set(current, it)
+            current++
+        }
+    }
+    return intersection
+}
+
+fun StaticArray<Int>.intersectionSorted(that: StaticArray<Int>): StaticArray<Int> {
+    var ptr1 = 0
+    var ptr2 = 0
+    val intersection = staticArrayOf(this.size + that.size) { -1 }
+    var current = 0
+    while (ptr1 < this.size && ptr2 < that.size) {
+        when {
+            this.get(ptr1) == that.get(ptr2) -> {
+                intersection.set(current, this.get(ptr1))
+                current++
+                ptr1++
+                ptr2++
+            }
+            this.get(ptr1) < that.get(ptr2) -> ptr1++
+            this.get(ptr1) > that.get(ptr2) -> ptr2++
+        }
+    }
+    return intersection
+}
 

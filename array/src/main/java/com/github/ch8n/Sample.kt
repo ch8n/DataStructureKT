@@ -129,4 +129,62 @@ internal fun main() {
         """.trimIndent()
     )
 
+    println(
+        """
+           list 1 -> ${staticArrayOf(1, 2, 3, 11).joinToString()}
+           list 2 -> ${staticArrayOf(9, 12).joinToString()}
+           mergeSorted -> ${
+            staticArrayOf(1, 2, 3, 11).mergeSorted(staticArrayOf(9, 12)).joinToString()
+        }
+        """.trimIndent()
+    )
+
+    println(
+        """
+           list 1 -> ${staticArrayOf(1, 12, 3).joinToString()}
+           list 2 -> ${staticArrayOf(3, 12, 18, 25, 1).joinToString()}
+           union -> ${
+            staticArrayOf(1, 12, 3)
+                .union(staticArrayOf(3, 12, 18, 25, 1))
+                .joinToString()
+        }
+        """.trimIndent()
+    )
+
+    println(
+        """
+           list 1 -> ${staticArrayOf(1, 2, 3, 5).joinToString()}
+           list 2 -> ${staticArrayOf(2, 4, 5, 6, 8, 9).joinToString()}
+           unionSorted -> ${
+            staticArrayOf(1, 2, 3, 5)
+                .unionSorted(staticArrayOf(2, 4, 5, 6, 8, 9))
+                .joinToString()
+        }
+        """.trimIndent()
+    )
+
+    println(
+        """
+           list 1 -> ${staticArrayOf(1, 2, 3, 5).joinToString()}
+           list 2 -> ${staticArrayOf(2, 4, 5, 6, 8, 9).joinToString()}
+           intersection -> ${
+            staticArrayOf(1, 2, 3, 5)
+                .intersection(staticArrayOf(2, 4, 5, 6, 8, 9))
+                .joinToString()
+        }
+        """.trimIndent()
+    )
+
+    println(
+        """
+           list 1 -> ${staticArrayOf(1, 2, 3, 5).joinToString()}
+           list 2 -> ${staticArrayOf(2, 4, 5, 6, 8, 9).joinToString()}
+           intersectionSorted -> ${
+            staticArrayOf(1, 2, 3, 5)
+                .intersectionSorted(staticArrayOf(2, 4, 5, 6, 8, 9))
+                .joinToString()
+        }
+        """.trimIndent()
+    )
+
 }

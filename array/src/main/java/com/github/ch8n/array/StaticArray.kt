@@ -60,3 +60,7 @@ fun <T> staticArrayOf(size: Int, initializer: (index: Int) -> T): StaticArray<T>
     StaticArray.of(size, initializer)
 
 fun <T> staticArrayOf(vararg items: T) = StaticArray.of(items.size, items::get)
+
+fun <T> List<T>.toStaticArray(): StaticArray<T> {
+    return staticArrayOf(size) { get(it) }
+}

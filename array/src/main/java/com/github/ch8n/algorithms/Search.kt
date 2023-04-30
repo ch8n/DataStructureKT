@@ -20,7 +20,7 @@ fun <T> StaticArrayOperations<T>.linearSearch(targetValue: T): Int {
 fun StaticArrayOperations<Int>.binarySearch(targetValue: Int, startIndex: Int = 0, endIndex: Int = lastIndex): Int {
     if (startIndex > endIndex) return -1
 
-    val mid = (startIndex + endIndex) / 2
+    val mid = startIndex + ((endIndex - startIndex) / 2)
     return when {
         get(mid) == targetValue -> mid
 
