@@ -56,7 +56,7 @@ fun <T> StaticArray<T>.reverseInPlace2() {
     }
 }
 
-fun <T> StaticArray<T>.shiftRight(times: Int = 2) {
+fun <T> StaticArray<T>.rotate(times: Int = 2) {
     repeat(times) {
         var temp: T = get(lastIndex)
         for (index in lastIndex downTo 1) {
@@ -122,5 +122,20 @@ fun StaticArray<Int>.shiftPositiveRight() {
         }
     }
 }
+
+fun StaticArray<Int>.merge(that: StaticArray<Int>): StaticArray<Int> {
+    val merged = staticArrayOf(this.size + that.size) { -1 }
+    var current = 0
+    this.forEach {
+        merged.set(current, it)
+        ++current
+    }
+    that.forEach {
+        merged.set(current, it)
+        ++current
+    }
+    return merged
+}
+
 
 

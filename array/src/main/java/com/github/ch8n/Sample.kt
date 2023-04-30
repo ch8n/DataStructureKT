@@ -78,7 +78,7 @@ internal fun main() {
     println(
         """
             current -> ${staticArray.joinToString()}
-            reverse(In Place 2) -> ${staticArray.shiftRight()}
+            reverse(In Place 2) -> ${staticArray.rotate()}
             current -> ${staticArray.joinToString()}
         """.trimIndent()
     )
@@ -107,14 +107,24 @@ internal fun main() {
     )
 
 
+//    println(
+//        """
+//            list -> ${staticArrayOf(-1, 2, 0, -3, 0, 7).joinToString()}
+//            shift positive right -> ${
+//            staticArrayOf(-1, 2, 0, -3, 0, 7).let {
+//                it.shiftPositiveRight()
+//                it.joinToString()
+//            }
+//        }
+//        """.trimIndent()
+//    )
+
     println(
         """
-            list -> ${staticArrayOf(-1, 2, 0, -3, 0, 7).joinToString()}
-            shift positive right -> ${
-            staticArrayOf(-1, 2, 0, -3, 0, 7).let {
-                it.shiftPositiveRight()
-                it.joinToString()
-            }
+           list 1 -> ${staticArrayOf(1, 2, 3).joinToString()}
+           list 2 -> ${staticArrayOf(7, 9, 12).joinToString()}
+           merged -> ${
+            staticArrayOf(1, 2, 3).merge(staticArrayOf(7, 9, 12)).joinToString()
         }
         """.trimIndent()
     )
