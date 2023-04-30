@@ -274,6 +274,7 @@ fun StaticArray<Int>.intersectionSorted(that: StaticArray<Int>): StaticArray<Int
                 ptr1++
                 ptr2++
             }
+
             this.get(ptr1) < that.get(ptr2) -> ptr1++
             this.get(ptr1) > that.get(ptr2) -> ptr2++
         }
@@ -281,3 +282,37 @@ fun StaticArray<Int>.intersectionSorted(that: StaticArray<Int>): StaticArray<Int
     return intersection
 }
 
+fun StaticArray<Int>.difference(that: StaticArray<Int>): StaticArray<Int> {
+    val difference = staticArrayOf(this.size + that.size) { -1 }
+    var current = 0
+    this.forEach {
+        if (that.linearSearch(it) == -1) {
+            difference.set(current, it)
+            current++
+        }
+    }
+    return difference
+}
+
+fun StaticArray<Int>.differenceSorted(that: StaticArray<Int>): StaticArray<Int> {
+    val difference = staticArrayOf(this.size + that.size) { -1 }
+    var current = 0
+    var ptr1 = 0
+    var ptr2 = 0
+    while (ptr1 < this.size) {
+        when {
+            this.get(ptr1) < that.get(ptr2) -> {
+                difference.set(current, this.get(ptr1))
+                current++
+                ptr1++
+            }
+
+            this.get(ptr1) > that.get(ptr2) -> ptr2++
+            this.get(ptr1) == that.get(ptr2) -> {
+                ptr1++
+                ptr2++
+            }
+        }
+    }
+    return difference
+}

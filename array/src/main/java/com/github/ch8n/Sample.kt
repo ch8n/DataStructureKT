@@ -187,4 +187,28 @@ internal fun main() {
         """.trimIndent()
     )
 
+    println(
+        """
+           list 1 -> ${staticArrayOf(1, 2, 3, 5).joinToString()}
+           list 2 -> ${staticArrayOf(2, 4, 5, 6, 8, 9).joinToString()}
+           difference -> ${
+            staticArrayOf(1, 2, 3, 5)
+                .difference(staticArrayOf(2, 4, 5, 6, 8, 9))
+                .joinToString()
+        }
+        """.trimIndent()
+    )
+
+    println(
+        """
+           list 1 -> ${staticArrayOf(1, 2, 3, 5).joinToString()}
+           list 2 -> ${staticArrayOf(2, 4, 5, 6, 8, 9).joinToString()}
+           differenceSorted -> ${
+            staticArrayOf(1, 2, 3, 5)
+                .differenceSorted(staticArrayOf(2, 4, 5, 6, 8, 9))
+                .joinToString()
+        }
+        """.trimIndent()
+    )
+
 }
