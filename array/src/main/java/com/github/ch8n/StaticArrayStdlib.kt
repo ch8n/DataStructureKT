@@ -4,6 +4,7 @@ import com.github.ch8n.algorithms.binarySearch
 import com.github.ch8n.algorithms.linearSearch
 import com.github.ch8n.array.StaticArray
 import com.github.ch8n.array.staticArrayOf
+import com.github.ch8n.array.toStaticArray
 
 
 fun StaticArray<Int>.max(): Int {
@@ -315,4 +316,61 @@ fun StaticArray<Int>.differenceSorted(that: StaticArray<Int>): StaticArray<Int> 
         }
     }
     return difference
+}
+
+
+fun StaticArray<Int>.findDuplicateSorted(): StaticArray<Int> {
+    val duplicateAccumulator = staticArrayOf(size) { -1 }
+    var currentIndex = 0
+    for (index in 0..lastIndex - 1) {
+        if (get(index) == get(index + 1)) {
+            duplicateAccumulator.set(currentIndex, get(index))
+            currentIndex++
+        }
+    }
+    return duplicateAccumulator
+}
+
+
+fun StaticArray<Int>.countDuplicateSorted(): StaticArray<Pair<Int?, Int>> {
+    val duplicatePairs = this.groupBy { it }
+        .map { (key, value) -> key to value.count() }
+        .filter { (key, count) -> count > 1 }
+    return duplicatePairs.toStaticArray()
+}
+
+
+fun StaticArray<Int>.pairSumTo(target: Int): StaticArray<Pair<Int, Int>> {
+    val map = mutableMapOf<Int, Int>()
+
+    val acc = staticArrayOf(size) { Pair(-1, -1) }
+    var index = 0
+    forEach { item ->
+
+        val first = item
+        val firstExist = map.get(item) ?: 0
+        if (firstExist == 0) {
+            map.set(first, 1)
+        }
+        val second = target - first
+
+        if (second == first) return@forEach
+
+        val secondExist = map.get(second) ?: 0
+        if (secondExist == 0) return@forEach
+        acc.set(index++, item to second)
+    }
+    return acc
+}
+
+fun StaticArray<Int>.pairSumTo2(target: Int): StaticArray<Pair<Int, Int>> {
+    val acc = staticArrayOf(size) { Pair(-1, -1) }
+    var currentIndex = 0
+    val diff = this.map { target - it }
+    diff.forEachIndexed { index, item ->
+        if (this.linearSearch(item) != -1 && get(item) != item) {
+            acc.set(currentIndex++, this.get(index) to item)
+        }
+    }
+    return acc
 }

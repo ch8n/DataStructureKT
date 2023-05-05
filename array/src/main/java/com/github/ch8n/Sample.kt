@@ -211,4 +211,48 @@ internal fun main() {
         """.trimIndent()
     )
 
+    println(
+        """
+           list 1 -> ${staticArrayOf(3, 6, 6, 10, 12, 15, 15, 15, 20).joinToString()}
+           findDuplicateSorted -> ${
+            staticArrayOf(3, 6, 6, 10, 12, 15, 15, 15, 20)
+                .findDuplicateSorted()
+                .joinToString()
+        }
+        """.trimIndent()
+    )
+
+    println(
+        """
+           list 1 -> ${staticArrayOf(3, 6, 6, 10, 12, 15, 15, 15, 20).joinToString()}
+           countDuplicateSorted -> ${
+            staticArrayOf(3, 6, 6, 10, 12, 15, 15, 15, 20)
+                .countDuplicateSorted()
+                .joinToString()
+        }
+        """.trimIndent()
+    )
+
+    println(
+        """
+           list 1 -> ${staticArrayOf(6, 3, 8, 10, 16, 7, 5, 2, 9, 14).joinToString()}
+           pairSumTo -> ${
+            staticArrayOf(6, 3, 8, 10, 16, 7, 5, 2, 9, 14)
+                .pairSumTo(10)
+                .joinToString()
+        }
+        """.trimIndent()
+    )
+
+    println(
+        """
+           list 1 -> ${staticArrayOf(6, 3, 8, 10, 16, 7, 5, 2, 9, 14).joinToString()}
+           pairSumTo2 -> ${
+            staticArrayOf(6, 3, 8, 10, 16, 7, 5, 2, 9, 14)
+                .pairSumTo2(10)
+                .joinToString()
+        }
+        """.trimIndent()
+    )
+
 }

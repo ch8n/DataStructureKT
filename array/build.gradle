@@ -33,7 +33,7 @@ afterEvaluate {
                 from components.kotlin
                 groupId = 'com.github.ch8n'
                 artifactId = 'static-array-kt'
-                version = '0.1'
+                version = '0.2'
             }
         }
     }

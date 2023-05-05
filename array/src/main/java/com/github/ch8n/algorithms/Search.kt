@@ -13,6 +13,7 @@ fun <T> StaticArrayOperations<T>.linearSearch(targetValue: T): Int {
 
 
 /**
+ * Pre-req array must be sorted!
  * BinarySearch Complexity -->
  * worse -> O(log(n))
  * best -> O(1)
