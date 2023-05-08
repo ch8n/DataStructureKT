@@ -44,7 +44,7 @@ class StaticArray<T> private constructor(size: Int, initializer: (index: Int) ->
     override val size: Int = _array.size
 
     override val lastIndex: Int
-        get() = size - 1
+        get() = _array.lastIndex
 
     override fun iterator(): Iterator<T> {
         return GenericIterator(size, ::get)
