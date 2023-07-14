@@ -10,7 +10,6 @@ class GenericIterator<T>(
 
     override fun next(): T {
         if (!hasNext()) throw NoSuchElementException()
-        return getItemAt(currentIndex)
-            .also { currentIndex += 1 }
+        return getItemAt(currentIndex).also { currentIndex += 1 }
     }
 }

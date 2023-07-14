@@ -2,7 +2,10 @@ package com.github.ch8n
 
 import com.github.ch8n.algorithms.binarySearch
 import com.github.ch8n.algorithms.linearSearch
+import com.github.ch8n.array.StaticArray
 import com.github.ch8n.array.staticArrayOf
+
+
 
 internal fun main() {
     //val fixedArray = FixedArray.of(5) { -1 }
@@ -118,6 +121,7 @@ internal fun main() {
 //        }
 //        """.trimIndent()
 //    )
+
 
     println(
         """
