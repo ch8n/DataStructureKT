@@ -12,7 +12,9 @@ interface MatrixOperations<T> : Iterable<T> {
     fun columns(columns: Int): Array<T>
     fun get(row: Int, col: Int): T
     fun set(row: Int, col: Int, value: T)
+}
 
+interface MatrixOpsAdvance<T> : MatrixOperations<T> {
     // advance
     fun plus(matrix: Matrix<T>)
     fun minus(matrix: Matrix<T>)
@@ -25,7 +27,9 @@ interface MatrixOperations<T> : Iterable<T> {
 val <T> MatrixOperations<T>.size get() = Pair(rowsCount, columnsCount)
 
 class Matrix<T> private constructor(
-    override val rowsCount: Int, override val columnsCount: Int, initializer: (row: Int, col: Int) -> T
+    override val rowsCount: Int,
+    override val columnsCount: Int,
+    initializer: (row: Int, col: Int) -> T
 ) : MatrixOperations<T> {
 
     private val matrix = Array(rowsCount) { rowIndex ->
@@ -39,40 +43,22 @@ class Matrix<T> private constructor(
             Matrix(rows, columns, initializer)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun rows(row: Int): Array<T> {
-        TODO("Not yet implemented")
+        return matrix.get(row) as Array<T>
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun columns(columns: Int): Array<T> {
-        TODO("Not yet implemented")
+        return (0..rowsCount)
+            .map { it to columns }
+            .map { matrix.get(it.first).get(it.second) }
+            .toTypedArray() as Array<T>
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun get(row: Int, col: Int): T {
-        TODO("Not yet implemented")
-    }
-
-    override fun inverse(matrix: Matrix<T>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun transpose(matrix: Matrix<T>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun dot(matrix: Matrix<T>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun cross(matrix: Matrix<T>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun minus(matrix: Matrix<T>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun plus(matrix: Matrix<T>) {
-        TODO("Not yet implemented")
+        return matrix.get(row).get(col) as T
     }
 
     override fun iterator(): Iterator<T> {
@@ -84,15 +70,16 @@ class Matrix<T> private constructor(
     }
 
     override fun set(row: Int, col: Int, value: T) {
-        TODO("Not yet implemented")
+        matrix.get(row).set(col, value as Any)
     }
 
     override fun toString(): String {
         return buildString {
             matrix.forEach { column ->
                 column.forEach { element ->
-                    append(element)
+                    append(" ~ $element ~")
                 }
+                append("\n")
             }
         }
     }
