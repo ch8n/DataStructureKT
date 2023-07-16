@@ -50,7 +50,7 @@ class Matrix<T> private constructor(
 
     @Suppress("UNCHECKED_CAST")
     override fun columns(columns: Int): Array<T> {
-        return (0..rowsCount)
+        return (0 until rowsCount)
             .map { it to columns }
             .map { matrix.get(it.first).get(it.second) }
             .toTypedArray() as Array<T>

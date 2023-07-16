@@ -11,4 +11,13 @@ internal fun main() {
     }
     println(matrix.toString())
 
+    println("rowCount  ${matrix.rowsCount}")
+    println("row 0  ${matrix.rows(0).joinToString()}")
+    println("columnCount ${matrix.columnsCount}")
+    println("columns ${matrix.columns(0).joinToString()}")
+    println("get 1,1 ${matrix.get(1,1)}")
+    println("set 1,1 to 99 ${matrix.set(1,1,99)}")
+    println("after update get 1,1 ${matrix.get(1,1)}")
+
+    println(matrix.toString())
 }
