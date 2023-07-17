@@ -2,7 +2,9 @@ package com.github.ch8n.matrix
 
 
 class MatrixIterator<T>(
-    private val rows: Int, private val columns: Int, private val getItemAt: (row: Int, col: Int) -> T
+    private val rows: Int,
+    private val columns: Int,
+    private val getItemAt: (row: Int, col: Int) -> T
 ) : Iterator<T> {
 
     private var currentRowIndex = 0

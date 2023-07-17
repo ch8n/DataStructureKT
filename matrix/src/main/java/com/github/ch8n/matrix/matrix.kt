@@ -1,5 +1,7 @@
 package com.github.ch8n.matrix
 
+import java.util.function.Consumer
+
 
 /***
  * Fixed array doesn't have ability to add or remove elements
@@ -67,6 +69,14 @@ class Matrix<T> private constructor(
             columns = columnsCount,
             getItemAt = ::get
         )
+    }
+
+    inline fun onEachIndexed(action: (rowIndex: Int, columnIndex: Int, value: T) -> Unit) {
+        (0 until rowsCount).forEach { rowIndex ->
+            (0 until columnsCount).forEach { columnIndex ->
+                action.invoke(rowIndex, columnIndex, get(rowIndex, columnIndex))
+            }
+        }
     }
 
     override fun set(row: Int, col: Int, value: T) {
