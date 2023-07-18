@@ -39,4 +39,27 @@ internal fun main() {
     val listMatrix = listOf("X", "Y", "Z").toDiagonalMatrix("A")
     println(listMatrix.toString())
     println("isDiagonal " + listMatrix.isDiagonal("A"))
+
+    val arrayMatix = arrayOf("c","h","8","n").toDiagonalMatrix("*")
+    println(arrayMatix.toString())
+    println("isDiagonal " + arrayMatix.isDiagonal("*"))
+
+    val diagonalMatrix = DiagonalMatrix.of(listOf(1,2,3),0)
+    println(diagonalMatrix.toString())
+    println("rowCount  ${diagonalMatrix.rowsCount}")
+    println("row 0  ${diagonalMatrix.rows(0).joinToString()}")
+    println("row 1  ${diagonalMatrix.rows(1).joinToString()}")
+    println("row 2  ${diagonalMatrix.rows(2).joinToString()}")
+    println("columnCount ${diagonalMatrix.columnsCount}")
+    println("columns 0 ${diagonalMatrix.columns(0).joinToString()}")
+    println("columns 1 ${diagonalMatrix.columns(1).joinToString()}")
+    println("columns 2 ${diagonalMatrix.columns(2).joinToString()}")
+    println("get 1,1 ${diagonalMatrix.get(1, 1)}")
+    println("set 1,1 to 99 ${diagonalMatrix.set(1, 1, 99)}")
+    println("after update get 1,1 ${diagonalMatrix.get(1, 1)}")
+    println(diagonalMatrix.toString())
+
+    println("joinToString" + diagonalMatrix.joinToString())
+    println("forEach" + diagonalMatrix.forEach { println(it) } )
+
 }
