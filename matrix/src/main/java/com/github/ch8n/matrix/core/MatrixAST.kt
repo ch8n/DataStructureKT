@@ -8,7 +8,6 @@ interface MatrixOperations<T> : Iterable<T> {
     fun columns(columns: Int): Array<T>
     fun get(row: Int, col: Int): T
     fun set(row: Int, col: Int, value: T)
-    fun onEach(iterator: (row: Int, col: Int, value: T) -> Unit)
 
     val size: Pair<Int, Int>
 }

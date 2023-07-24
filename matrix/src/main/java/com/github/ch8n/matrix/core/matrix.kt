@@ -54,7 +54,7 @@ class Matrix<T> private constructor(
         )
     }
 
-    override fun onEach(iterator: (rowIndex: Int, columnIndex: Int, value: T) -> Unit) {
+    inline fun onEach(iterator: (rowIndex: Int, columnIndex: Int, value: T) -> Unit) {
         (0 until rowsCount).forEach { rowIndex ->
             (0 until columnsCount).forEach { columnIndex ->
                 iterator.invoke(rowIndex, columnIndex, get(rowIndex, columnIndex))

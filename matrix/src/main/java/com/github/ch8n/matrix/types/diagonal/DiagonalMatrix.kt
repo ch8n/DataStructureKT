@@ -61,7 +61,7 @@ class DiagonalMatrix<T> private constructor(
         }
     }
 
-    override fun onEach(iterator: (row: Int, col: Int, value: T) -> Unit) {
+    inline fun onEach(iterator: (row: Int, col: Int, value: T) -> Unit) {
         (0 until rowsCount).forEach { rowIndex: Int ->
             (0 until columnsCount).forEach { columnIndex: Int ->
                 iterator.invoke(rowIndex, columnIndex, get(rowIndex, columnIndex))
