@@ -1,6 +1,6 @@
-package com.github.ch8n.matrix
+package com.github.ch8n.matrix.core
 
-import java.util.function.Consumer
+import com.github.ch8n.matrix.MatrixIterator
 
 
 /***
@@ -40,18 +40,22 @@ class Matrix<T> private constructor(
         }
     }
 
-    companion object {
-        fun <T> of(rows: Int, columns: Int, initializer: (row: Int, col: Int) -> T): Matrix<T> =
-            Matrix(rows, columns, initializer)
+    private fun checkRange(row: Int, col: Int) {
+        val inValidRange = row in (0 until rowsCount) && col in (0 until columnsCount)
+        if (!inValidRange) {
+            throw IndexOutOfBoundsException("$row out of $rowsCount or $col out of $columnsCount")
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun rows(row: Int): Array<T> {
+        checkRange(row, 0)
         return matrix.get(row) as Array<T>
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun columns(columns: Int): Array<T> {
+        checkRange(0, columns)
         return (0 until rowsCount)
             .map { it to columns }
             .map { matrix.get(it.first).get(it.second) }
@@ -60,6 +64,7 @@ class Matrix<T> private constructor(
 
     @Suppress("UNCHECKED_CAST")
     override fun get(row: Int, col: Int): T {
+        checkRange(row, col)
         return matrix.get(row).get(col) as T
     }
 
@@ -71,7 +76,7 @@ class Matrix<T> private constructor(
         )
     }
 
-    inline fun onEachIndexed(action: (rowIndex: Int, columnIndex: Int, value: T) -> Unit) {
+    inline fun onEach(action: (rowIndex: Int, columnIndex: Int, value: T) -> Unit) {
         (0 until rowsCount).forEach { rowIndex ->
             (0 until columnsCount).forEach { columnIndex ->
                 action.invoke(rowIndex, columnIndex, get(rowIndex, columnIndex))
@@ -80,6 +85,7 @@ class Matrix<T> private constructor(
     }
 
     override fun set(row: Int, col: Int, value: T) {
+        checkRange(row, col)
         matrix.get(row).set(col, value as Any)
     }
 
@@ -92,6 +98,11 @@ class Matrix<T> private constructor(
                 append("\n")
             }
         }
+    }
+
+    companion object {
+        fun <T> of(rows: Int, columns: Int, initializer: (row: Int, col: Int) -> T): Matrix<T> =
+            Matrix(rows, columns, initializer)
     }
 }
 
