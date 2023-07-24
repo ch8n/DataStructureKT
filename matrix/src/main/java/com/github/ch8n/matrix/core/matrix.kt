@@ -3,31 +3,6 @@ package com.github.ch8n.matrix.core
 import com.github.ch8n.matrix.MatrixIterator
 
 
-/***
- * Fixed array doesn't have ability to add or remove elements
- * it can only set and get data from array
- */
-interface MatrixOperations<T> : Iterable<T> {
-    val rowsCount: Int
-    val columnsCount: Int
-    fun rows(row: Int): Array<T>
-    fun columns(columns: Int): Array<T>
-    fun get(row: Int, col: Int): T
-    fun set(row: Int, col: Int, value: T)
-}
-
-interface MatrixOpsAdvance<T> : MatrixOperations<T> {
-    // advance
-    fun plus(matrix: Matrix<T>)
-    fun minus(matrix: Matrix<T>)
-    fun cross(matrix: Matrix<T>)
-    fun dot(matrix: Matrix<T>)
-    fun transpose(matrix: Matrix<T>)
-    fun inverse(matrix: Matrix<T>)
-}
-
-val <T> MatrixOperations<T>.size get() = Pair(rowsCount, columnsCount)
-
 class Matrix<T> private constructor(
     override val rowsCount: Int,
     override val columnsCount: Int,
@@ -39,6 +14,9 @@ class Matrix<T> private constructor(
             initializer.invoke(rowIndex, columnIndex) as Any
         }
     }
+
+    override val size: Pair<Int, Int>
+        get() = Pair(rowsCount, columnsCount)
 
     private fun checkRange(row: Int, col: Int) {
         val inValidRange = row in (0 until rowsCount) && col in (0 until columnsCount)
@@ -76,10 +54,10 @@ class Matrix<T> private constructor(
         )
     }
 
-    inline fun onEach(action: (rowIndex: Int, columnIndex: Int, value: T) -> Unit) {
+    override fun onEach(iterator: (rowIndex: Int, columnIndex: Int, value: T) -> Unit) {
         (0 until rowsCount).forEach { rowIndex ->
             (0 until columnsCount).forEach { columnIndex ->
-                action.invoke(rowIndex, columnIndex, get(rowIndex, columnIndex))
+                iterator.invoke(rowIndex, columnIndex, get(rowIndex, columnIndex))
             }
         }
     }
