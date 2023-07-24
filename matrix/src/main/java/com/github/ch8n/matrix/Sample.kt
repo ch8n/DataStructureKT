@@ -40,11 +40,11 @@ internal fun main() {
     println(listMatrix.toString())
     println("isDiagonal " + listMatrix.isDiagonal("A"))
 
-    val arrayMatix = arrayOf("c","h","8","n").toDiagonalMatrix("*")
+    val arrayMatix = arrayOf("c", "h", "8", "n").toDiagonalMatrix("*")
     println(arrayMatix.toString())
     println("isDiagonal " + arrayMatix.isDiagonal("*"))
 
-    val diagonalMatrix = DiagonalMatrix.of(listOf(1,2,3),0)
+    val diagonalMatrix = DiagonalMatrix.of(listOf(1, 2, 3), 0)
     println(diagonalMatrix.toString())
     println("rowCount  ${diagonalMatrix.rowsCount}")
     println("row 0  ${diagonalMatrix.rows(0).joinToString()}")
@@ -60,6 +60,22 @@ internal fun main() {
     println(diagonalMatrix.toString())
 
     println("joinToString" + diagonalMatrix.joinToString())
-    println("forEach" + diagonalMatrix.forEach { println(it) } )
+    println("forEach" + diagonalMatrix.forEach { println(it) })
 
+
+    println("====== Lower Triangle ======")
+    val lowerTriangleMatrix = matrixOf(5, 5) { row: Int, col: Int ->
+        if (row < col) "0" else {
+            "${row} ${(col + 1)}"
+        }
+    }
+    println(lowerTriangleMatrix.toString())
+
+    val lowerTriangleMatrix1 = matrixOf(5, 5) { row: Int, col: Int ->
+        if (row < col) 0 else {
+            (row - (1 * row)) + (col + 1)
+        }
+    }
+
+    println(lowerTriangleMatrix1.toString())
 }
