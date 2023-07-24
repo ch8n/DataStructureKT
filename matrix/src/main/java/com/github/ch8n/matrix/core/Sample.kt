@@ -38,6 +38,27 @@ internal fun main() {
     println(matrix.set(randomRow, randomColumn, randomValue))
     println(matrix)
 
+    println("===== Matrix is Diagonal Matrix? ====")
+    val inputMatrix1 = matrixOf(rowCount, columnCount) { row, col ->
+        val lastColumnIndex = columnCount - 1
+        row + col + ((lastColumnIndex * row) + 1)
+    }
+    println(inputMatrix1)
+    println("isDiagonal : ${inputMatrix1.isDiagonal(0)}")
+
+    val diagonal = inputMatrix1.asDiagonal(0)
+    println(diagonal)
+    println("isDiagonal Now?: ${diagonal.isDiagonal(0)}")
+
+    println("===== List as Diagonal Matrix ====")
+    val inputList = listOf(1,2,3,4)
+    val diagonal1 = inputList.asDiagonalMatrix(0)
+    println(diagonal1)
+
+    println("===== Array as Diagonal Matrix ====")
+    val inputArray = arrayOf(1,2,3,4)
+    val diagonal2 = inputArray.asDiagonalMatrix(0)
+    println(diagonal2)
 }
 
 
