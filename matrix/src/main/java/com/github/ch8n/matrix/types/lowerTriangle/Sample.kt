@@ -5,17 +5,29 @@ import com.github.ch8n.matrix.core.matrixOf
 
 internal fun main() {
 
-    val rowCount = 3
-    val columnCount = 3
+    /***
+     *  row --->
+     *  X | 0 1 2 3
+     *  0 | 1 0 0 0
+     *  1 | 2 3 0 0
+     *  2 | 4 5 6 0
+     */
 
-    val matrix = matrixOf(rowCount, columnCount) { row, col ->
-        val lastColumnIndex = columnCount - 1
-        row + col + ((lastColumnIndex * row) + 1)
+    val lowerTriangularMatrix = LowerTriangleMatrix.of(
+        storageStrategy = LowerTriangleStorageStrategy.RowMajor,
+        default = 0,
+        items = arrayOf(1, 2, 3, 4, 5, 6)
+    )
+
+    println(lowerTriangularMatrix)
+
+    repeat(lowerTriangularMatrix.rowsCount){
+        println(lowerTriangularMatrix.rows(it).joinToString())
     }
 
-    val lowerTriangleMatrix = matrix.toLowerTriangleMatrix(0)
-    println("Lower Triangle | lower element count | ${lowerTriangleMatrix.lowerTriangleElementCount} ")
-    println("Lower Triangle | upper element count | ${lowerTriangleMatrix.upperTriangleElementCount} ")
+    repeat(lowerTriangularMatrix.columnsCount){
+        println(lowerTriangularMatrix.columns(it).joinToString())
+    }
 
 }
 
