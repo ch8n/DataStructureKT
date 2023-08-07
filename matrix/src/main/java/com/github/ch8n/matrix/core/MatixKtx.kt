@@ -30,22 +30,3 @@ fun <T> Matrix<T>.isDiagonal(default: T): Boolean {
     }
     return true
 }
-
-/***
- * isLowerTriangleMatrix means lower triangle has value other has zeros
- * value == 0 if rowIndex < columnIndex
- * value == Any if rowIndex == columnIndex or rowIndex > columnIndex
- *
- * if size of matrix = n^2
- *    non-zero elements = (n * (n+1))/2
- *    zero elements = n^2 - non-zero elements = (n * (n - 1))/2
- */
-fun Matrix<Int>.isLowerTriangleMatrix(): Boolean {
-    onEach { rowIndex, columnIndex, value ->
-        val isValid = rowIndex > columnIndex && value == 0
-        if (!isValid) {
-            return false
-        }
-    }
-    return true
-}

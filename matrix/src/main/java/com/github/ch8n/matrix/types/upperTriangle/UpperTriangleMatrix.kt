@@ -1,9 +1,9 @@
-package com.github.ch8n.matrix.types.lowerTriangle
+package com.github.ch8n.matrix.types.upperTriangle
 
 import com.github.ch8n.matrix.core.MatrixOperations
 import kotlin.math.sqrt
 
-enum class LowerTriangleStrategy {
+enum class UpperTriangleStrategy {
     RowMajor,
     ColumnMajor
 }
@@ -11,19 +11,20 @@ enum class LowerTriangleStrategy {
 /***
  *  row --->
  *  X | 0 1 2 3
- *  0 | 1 0 0 0
- *  1 | 2 3 0 0
- *  2 | 4 5 6 0
- *  3 | 7 8 9 10
+ *  0 | 1 2 3 4
+ *  1 | 0 5 6 7
+ *  2 | 0 0 8 9
+ *  3 | 0 0 0 10
  *
  *  lower triangle matrix means :
- *  upper half triangle is zero|default & lower half has value
- *  if columnIndex <= rowIndex  -> value
+ *  lower half triangle is zero|default & upper half has value
+ *  if rowIndex <= columnIndex  -> value
  *  else  -> zero|default
+ *
  */
 
-class LowerTriangleMatrix<T> private constructor(
-    val storageStrategy: LowerTriangleStrategy,
+class UpperTriangleMatrix<T> private constructor(
+    val storageStrategy: UpperTriangleStrategy,
     val default: T,
     private val items: Array<T>,
 ) : MatrixOperations<T> {
@@ -47,8 +48,8 @@ class LowerTriangleMatrix<T> private constructor(
     }
 
     private fun getIndex(row: Int, col: Int): Int = when (storageStrategy) {
-        LowerTriangleStrategy.RowMajor -> ((row * (row + 1)) / 2) + col
-        LowerTriangleStrategy.ColumnMajor -> col * rowsCount - (col * (col + 1) / 2) + row
+        UpperTriangleStrategy.RowMajor -> ((row * (row + 1)) / 2) + col
+        UpperTriangleStrategy.ColumnMajor -> col * rowsCount - (col * (col + 1) / 2) + row
     }
 
     private fun checkRange(row: Int, column: Int) {
@@ -114,11 +115,10 @@ class LowerTriangleMatrix<T> private constructor(
 
     companion object {
         fun <T> of(
-            storageStrategy: LowerTriangleStrategy,
+            storageStrategy: UpperTriangleStrategy,
             default: T,
             items: Array<T>
-        ) = LowerTriangleMatrix(storageStrategy, default, items)
-
+        ) = UpperTriangleMatrix(storageStrategy, default, items)
     }
 }
 

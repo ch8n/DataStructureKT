@@ -1,5 +1,7 @@
 package com.github.ch8n.matrix.types.lowerTriangle
 
+import com.github.ch8n.matrix.core.matrixOf
+
 
 internal fun main() {
 
@@ -19,11 +21,11 @@ internal fun main() {
 
     println(lowerTriangularMatrix)
 
-    repeat(lowerTriangularMatrix.rowsCount){
+    repeat(lowerTriangularMatrix.rowsCount) {
         println(lowerTriangularMatrix.rows(it).joinToString())
     }
 
-    repeat(lowerTriangularMatrix.columnsCount){
+    repeat(lowerTriangularMatrix.columnsCount) {
         println(lowerTriangularMatrix.columns(it).joinToString())
     }
 
@@ -35,13 +37,42 @@ internal fun main() {
 
     println(lowerTriangularMatrix2)
 
-    repeat(lowerTriangularMatrix2.rowsCount){
+    repeat(lowerTriangularMatrix2.rowsCount) {
         println(lowerTriangularMatrix2.rows(it).joinToString())
     }
 
-    repeat(lowerTriangularMatrix2.columnsCount){
+    repeat(lowerTriangularMatrix2.columnsCount) {
         println(lowerTriangularMatrix2.columns(it).joinToString())
     }
+
+    val matrix = matrixOf(3, 3) { row, col ->
+        val lastColumnIndex = 3 - 1
+        row + col + ((lastColumnIndex * row) + 1)
+    }
+    println(matrix)
+
+    val matrixAsLowerTriangle = matrix.asLowerTriangleMatrix(default = 0)
+    println(matrixAsLowerTriangle)
+
+    println(matrixAsLowerTriangle.isLowerTriangleMatrix(default = 0))
+
+    val lowerTriangleMatrix4 = matrix.toLowerTriangleMatrix(default = 0)
+    println(lowerTriangleMatrix4)
+
+    val lowerTriangleMatrix5 = listOf(1, 2, 3, 4, 5, 6)
+        .toLowerTriangleMatrix(
+            default = 0,
+            storageStrategy = LowerTriangleStrategy.RowMajor
+        )
+    println(lowerTriangleMatrix5)
+
+    val lowerTriangleMatrix6 = Array(6) { it }
+        .toLowerTriangleMatrix(
+            default = 0,
+            storageStrategy = LowerTriangleStrategy.RowMajor
+        )
+
+    println(lowerTriangleMatrix6)
 
 }
 
