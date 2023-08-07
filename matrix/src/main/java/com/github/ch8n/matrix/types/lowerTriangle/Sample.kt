@@ -29,6 +29,22 @@ internal fun main() {
         println(lowerTriangularMatrix.columns(it).joinToString())
     }
 
+    val lowerTriangularMatrix2 = LowerTriangleMatrix.of(
+        storageStrategy = LowerTriangleStorageStrategy.ColumnMajor,
+        default = 0,
+        items = arrayOf(1, 2, 3, 4, 5, 6)
+    )
+
+    println(lowerTriangularMatrix2)
+
+    repeat(lowerTriangularMatrix2.rowsCount){
+        println(lowerTriangularMatrix2.rows(it).joinToString())
+    }
+
+    repeat(lowerTriangularMatrix2.columnsCount){
+        println(lowerTriangularMatrix2.columns(it).joinToString())
+    }
+
 }
 
 

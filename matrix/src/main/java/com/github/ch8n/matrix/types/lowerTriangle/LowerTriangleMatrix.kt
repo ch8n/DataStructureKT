@@ -48,7 +48,7 @@ class LowerTriangleMatrix<T> private constructor(
 
     private fun getIndex(row: Int, col: Int): Int = when (storageStrategy) {
         LowerTriangleStorageStrategy.RowMajor -> ((row * (row + 1)) / 2) + col
-        LowerTriangleStorageStrategy.ColumnMajor -> TODO()
+        LowerTriangleStorageStrategy.ColumnMajor -> (columnsCount * ((col - 1) - ((col - 2) * (col - 1) / 2))) + (row - col)
     }
 
     private fun checkRange(row: Int, column: Int) {
