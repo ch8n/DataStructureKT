@@ -1,7 +1,5 @@
 package com.github.ch8n.matrix.types.lowerTriangle
 
-import com.github.ch8n.matrix.core.matrixOf
-
 
 internal fun main() {
 
@@ -14,7 +12,7 @@ internal fun main() {
      */
 
     val lowerTriangularMatrix = LowerTriangleMatrix.of(
-        storageStrategy = LowerTriangleStorageStrategy.RowMajor,
+        storageStrategy = LowerTriangleStrategy.RowMajor,
         default = 0,
         items = arrayOf(1, 2, 3, 4, 5, 6)
     )
@@ -30,7 +28,7 @@ internal fun main() {
     }
 
     val lowerTriangularMatrix2 = LowerTriangleMatrix.of(
-        storageStrategy = LowerTriangleStorageStrategy.ColumnMajor,
+        storageStrategy = LowerTriangleStrategy.ColumnMajor,
         default = 0,
         items = arrayOf(1, 2, 3, 4, 5, 6)
     )

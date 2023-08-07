@@ -3,7 +3,7 @@ package com.github.ch8n.matrix.types.lowerTriangle
 import com.github.ch8n.matrix.core.MatrixOperations
 import kotlin.math.sqrt
 
-enum class LowerTriangleStorageStrategy {
+enum class LowerTriangleStrategy {
     RowMajor,
     ColumnMajor
 }
@@ -23,7 +23,7 @@ enum class LowerTriangleStorageStrategy {
  */
 
 class LowerTriangleMatrix<T> private constructor(
-    val storageStrategy: LowerTriangleStorageStrategy,
+    val storageStrategy: LowerTriangleStrategy,
     val default: T,
     private val items: Array<T>,
 ) : MatrixOperations<T> {
@@ -47,8 +47,8 @@ class LowerTriangleMatrix<T> private constructor(
     }
 
     private fun getIndex(row: Int, col: Int): Int = when (storageStrategy) {
-        LowerTriangleStorageStrategy.RowMajor -> ((row * (row + 1)) / 2) + col
-        LowerTriangleStorageStrategy.ColumnMajor -> col * rowsCount - (col * (col + 1) / 2) + row
+        LowerTriangleStrategy.RowMajor -> ((row * (row + 1)) / 2) + col
+        LowerTriangleStrategy.ColumnMajor -> col * rowsCount - (col * (col + 1) / 2) + row
     }
 
     private fun checkRange(row: Int, column: Int) {
@@ -114,7 +114,7 @@ class LowerTriangleMatrix<T> private constructor(
 
     companion object {
         fun <T> of(
-            storageStrategy: LowerTriangleStorageStrategy,
+            storageStrategy: LowerTriangleStrategy,
             default: T,
             items: Array<T>
         ) = LowerTriangleMatrix(storageStrategy, default, items)
