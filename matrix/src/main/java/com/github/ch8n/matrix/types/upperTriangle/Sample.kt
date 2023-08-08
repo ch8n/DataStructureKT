@@ -23,6 +23,20 @@ internal fun main() {
     val matrixAsUpperTriangleMatrix = matrix.asUpperTriangleMatrix(0)
     println(matrixAsUpperTriangleMatrix)
 
+    val upperMatrix1 = UpperTriangleMatrix.of(
+        storageStrategy = UpperTriangleStrategy.RowMajor,
+        default = 0,
+        items = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+    )
+    println(upperMatrix1)
+
+    val upperMatrix2 = UpperTriangleMatrix.of(
+        storageStrategy = UpperTriangleStrategy.ColumnMajor,
+        default = 0,
+        items = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+    )
+    println(upperMatrix2)
+
 }
 
 

@@ -48,8 +48,8 @@ class UpperTriangleMatrix<T> private constructor(
     }
 
     private fun getIndex(row: Int, col: Int): Int = when (storageStrategy) {
-        UpperTriangleStrategy.RowMajor -> ((row * (row + 1)) / 2) + col
-        UpperTriangleStrategy.ColumnMajor -> col * rowsCount - (col * (col + 1) / 2) + row
+        UpperTriangleStrategy.RowMajor -> row * rowsCount - (row * (row + 1) / 2) + col
+        UpperTriangleStrategy.ColumnMajor -> ((col * (col + 1)) / 2) + row
     }
 
     private fun checkRange(row: Int, column: Int) {
@@ -68,7 +68,7 @@ class UpperTriangleMatrix<T> private constructor(
 
     override fun get(row: Int, col: Int): T {
         checkRange(row, col)
-        return if (row >= col) items.get(getIndex(row, col)) else default
+        return if (row <= col) items.get(getIndex(row, col)) else default
     }
 
     override val size: Pair<Int, Int>
