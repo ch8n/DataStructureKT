@@ -1,5 +1,7 @@
 package com.github.ch8n.matrix.types.upperTriangle
 
+import com.github.ch8n.matrix.core.matrixOf
+
 
 internal fun main() {
 
@@ -9,39 +11,17 @@ internal fun main() {
      *  0 | 1 2 3 4
      *  1 | 0 5 6 7
      *  2 | 0 0 8 9
+     *  3 | 0 0 0 10
      */
 
-    val upperTriangularMatrix = UpperTriangleMatrix.of(
-        storageStrategy = UpperTriangleStrategy.RowMajor,
-        default = 0,
-        items = arrayOf(1, 2, 3, 4, 5, 6)
-    )
-
-    println(upperTriangularMatrix)
-
-    repeat(upperTriangularMatrix.rowsCount){
-        println(upperTriangularMatrix.rows(it).joinToString())
+    val matrix = matrixOf(4, 4) { row, col ->
+        val lastColumnIndex = 4 - 1
+        row + col + ((lastColumnIndex * row) + 1)
     }
+    println(matrix)
 
-    repeat(upperTriangularMatrix.columnsCount){
-        println(upperTriangularMatrix.columns(it).joinToString())
-    }
-
-    val upperTriangularMatrix2 = UpperTriangleMatrix.of(
-        storageStrategy = UpperTriangleStrategy.ColumnMajor,
-        default = 0,
-        items = arrayOf(1, 2, 3, 4, 5, 6)
-    )
-
-    println(upperTriangularMatrix2)
-
-    repeat(upperTriangularMatrix2.rowsCount){
-        println(upperTriangularMatrix2.rows(it).joinToString())
-    }
-
-    repeat(upperTriangularMatrix2.columnsCount){
-        println(upperTriangularMatrix2.columns(it).joinToString())
-    }
+    val matrixAsUpperTriangleMatrix = matrix.asUpperTriangleMatrix(0)
+    println(matrixAsUpperTriangleMatrix)
 
 }
 

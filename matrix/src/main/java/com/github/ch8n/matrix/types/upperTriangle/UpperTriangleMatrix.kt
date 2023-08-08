@@ -16,11 +16,11 @@ enum class UpperTriangleStrategy {
  *  2 | 0 0 8 9
  *  3 | 0 0 0 10
  *
- *  lower triangle matrix means :
- *  lower half triangle is zero|default & upper half has value
- *  if rowIndex <= columnIndex  -> value
- *  else  -> zero|default
+ *  upper triangle matrix means :
+ *  upper half triangle has value & lower half has zero / default
  *
+ *  if rowIndex >= columnIndex -> value
+ *  else  -> zero|default
  */
 
 class UpperTriangleMatrix<T> private constructor(
