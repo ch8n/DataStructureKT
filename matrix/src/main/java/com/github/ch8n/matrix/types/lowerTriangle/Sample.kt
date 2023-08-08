@@ -14,7 +14,7 @@ internal fun main() {
      */
 
     val lowerTriangularMatrix = LowerTriangleMatrix.of(
-        storageStrategy = LowerTriangleStrategy.RowMajor,
+        matrixStrategy = TriangleMatrixStrategy.RowMajor,
         default = 0,
         items = arrayOf(1, 2, 3, 4, 5, 6)
     )
@@ -30,7 +30,7 @@ internal fun main() {
     }
 
     val lowerTriangularMatrix2 = LowerTriangleMatrix.of(
-        storageStrategy = LowerTriangleStrategy.ColumnMajor,
+        matrixStrategy = TriangleMatrixStrategy.ColumnMajor,
         default = 0,
         items = arrayOf(1, 2, 3, 4, 5, 6)
     )
@@ -62,14 +62,14 @@ internal fun main() {
     val lowerTriangleMatrix5 = listOf(1, 2, 3, 4, 5, 6)
         .toLowerTriangleMatrix(
             default = 0,
-            storageStrategy = LowerTriangleStrategy.RowMajor
+            matrixStrategy = TriangleMatrixStrategy.RowMajor
         )
     println(lowerTriangleMatrix5)
 
     val lowerTriangleMatrix6 = Array(6) { it }
         .toLowerTriangleMatrix(
             default = 0,
-            storageStrategy = LowerTriangleStrategy.RowMajor
+            matrixStrategy = TriangleMatrixStrategy.RowMajor
         )
 
     println(lowerTriangleMatrix6)

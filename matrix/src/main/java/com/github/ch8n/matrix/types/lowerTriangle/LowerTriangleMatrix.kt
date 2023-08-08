@@ -3,7 +3,7 @@ package com.github.ch8n.matrix.types.lowerTriangle
 import com.github.ch8n.matrix.core.MatrixOperations
 import kotlin.math.sqrt
 
-enum class LowerTriangleStrategy {
+enum class TriangleMatrixStrategy {
     RowMajor,
     ColumnMajor
 }
@@ -23,7 +23,7 @@ enum class LowerTriangleStrategy {
  */
 
 class LowerTriangleMatrix<T> private constructor(
-    val storageStrategy: LowerTriangleStrategy,
+    val matrixStrategy: TriangleMatrixStrategy,
     val default: T,
     private val items: Array<T>,
 ) : MatrixOperations<T> {
@@ -46,9 +46,9 @@ class LowerTriangleMatrix<T> private constructor(
         return (0 until rowsCount).map { get(it, columns) as Any }.toTypedArray() as Array<T>
     }
 
-    private fun getIndex(row: Int, col: Int): Int = when (storageStrategy) {
-        LowerTriangleStrategy.RowMajor -> ((row * (row + 1)) / 2) + col
-        LowerTriangleStrategy.ColumnMajor -> col * rowsCount - (col * (col + 1) / 2) + row
+    private fun getIndex(row: Int, col: Int): Int = when (matrixStrategy) {
+        TriangleMatrixStrategy.RowMajor -> ((row * (row + 1)) / 2) + col
+        TriangleMatrixStrategy.ColumnMajor -> col * rowsCount - (col * (col + 1) / 2) + row
     }
 
     private fun checkRange(row: Int, column: Int) {
@@ -114,10 +114,10 @@ class LowerTriangleMatrix<T> private constructor(
 
     companion object {
         fun <T> of(
-            storageStrategy: LowerTriangleStrategy,
+            matrixStrategy: TriangleMatrixStrategy,
             default: T,
             items: Array<T>
-        ) = LowerTriangleMatrix(storageStrategy, default, items)
+        ) = LowerTriangleMatrix(matrixStrategy, default, items)
 
     }
 }

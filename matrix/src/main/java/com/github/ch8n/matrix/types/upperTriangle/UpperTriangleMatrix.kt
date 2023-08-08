@@ -1,12 +1,9 @@
 package com.github.ch8n.matrix.types.upperTriangle
 
 import com.github.ch8n.matrix.core.MatrixOperations
+import com.github.ch8n.matrix.types.lowerTriangle.TriangleMatrixStrategy
 import kotlin.math.sqrt
 
-enum class UpperTriangleStrategy {
-    RowMajor,
-    ColumnMajor
-}
 
 /***
  *  row --->
@@ -24,7 +21,7 @@ enum class UpperTriangleStrategy {
  */
 
 class UpperTriangleMatrix<T> private constructor(
-    val storageStrategy: UpperTriangleStrategy,
+    val matrixStrategy: TriangleMatrixStrategy,
     val default: T,
     private val items: Array<T>,
 ) : MatrixOperations<T> {
@@ -47,9 +44,9 @@ class UpperTriangleMatrix<T> private constructor(
         return (0 until rowsCount).map { get(it, columns) as Any }.toTypedArray() as Array<T>
     }
 
-    private fun getIndex(row: Int, col: Int): Int = when (storageStrategy) {
-        UpperTriangleStrategy.RowMajor -> row * rowsCount - (row * (row + 1) / 2) + col
-        UpperTriangleStrategy.ColumnMajor -> ((col * (col + 1)) / 2) + row
+    private fun getIndex(row: Int, col: Int): Int = when (matrixStrategy) {
+        TriangleMatrixStrategy.RowMajor -> row * rowsCount - (row * (row + 1) / 2) + col
+        TriangleMatrixStrategy.ColumnMajor -> ((col * (col + 1)) / 2) + row
     }
 
     private fun checkRange(row: Int, column: Int) {
@@ -115,10 +112,10 @@ class UpperTriangleMatrix<T> private constructor(
 
     companion object {
         fun <T> of(
-            storageStrategy: UpperTriangleStrategy,
+            matrixStrategy: TriangleMatrixStrategy,
             default: T,
             items: Array<T>
-        ) = UpperTriangleMatrix(storageStrategy, default, items)
+        ) = UpperTriangleMatrix(matrixStrategy, default, items)
     }
 }
 

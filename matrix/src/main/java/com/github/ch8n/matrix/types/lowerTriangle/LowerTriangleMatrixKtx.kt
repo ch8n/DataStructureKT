@@ -2,7 +2,7 @@ package com.github.ch8n.matrix.types.lowerTriangle
 
 import com.github.ch8n.matrix.core.Matrix
 import com.github.ch8n.matrix.core.matrixOf
-import com.github.ch8n.matrix.types.lowerTriangle.LowerTriangleStrategy.*
+import com.github.ch8n.matrix.types.lowerTriangle.TriangleMatrixStrategy.*
 
 
 fun <T> Matrix<T>.asLowerTriangleMatrix(default: T): Matrix<T> {
@@ -11,8 +11,6 @@ fun <T> Matrix<T>.asLowerTriangleMatrix(default: T): Matrix<T> {
     }
 }
 
-
-//TODO failing fix
 fun <T> Matrix<T>.isLowerTriangleMatrix(default: T): Boolean {
     onEach { rowIndex, columnIndex, value ->
         if (rowIndex < columnIndex) {
@@ -25,18 +23,18 @@ fun <T> Matrix<T>.isLowerTriangleMatrix(default: T): Boolean {
 
 inline fun <reified T> List<T>.toLowerTriangleMatrix(
     default: T,
-    storageStrategy: LowerTriangleStrategy = RowMajor,
-): LowerTriangleMatrix<T> = lowerTriangleMatrixOf(storageStrategy, default, this)
+    matrixStrategy: TriangleMatrixStrategy = RowMajor,
+): LowerTriangleMatrix<T> = lowerTriangleMatrixOf(matrixStrategy, default, this)
 
 inline fun <reified T> Array<T>.toLowerTriangleMatrix(
     default: T,
-    storageStrategy: LowerTriangleStrategy = RowMajor,
-): LowerTriangleMatrix<T> = lowerTriangleMatrixOf(storageStrategy, default, this)
+    matrixStrategy: TriangleMatrixStrategy = RowMajor,
+): LowerTriangleMatrix<T> = lowerTriangleMatrixOf(matrixStrategy, default, this)
 
 
 inline fun <reified T> Matrix<T>.toLowerTriangleMatrix(
     default: T,
-    storageStrategy: LowerTriangleStrategy = RowMajor,
+    matrixStrategy: TriangleMatrixStrategy = RowMajor,
 ): LowerTriangleMatrix<T> {
 
     val items: List<T> = buildList {
@@ -46,7 +44,7 @@ inline fun <reified T> Matrix<T>.toLowerTriangleMatrix(
     }
 
     return lowerTriangleMatrixOf(
-        storageStrategy = storageStrategy,
+        matrixStrategy = matrixStrategy,
         default = default,
         items = items
     )
@@ -54,12 +52,12 @@ inline fun <reified T> Matrix<T>.toLowerTriangleMatrix(
 
 @JvmName("lowerTriangleMatrixFromArray")
 fun <T> lowerTriangleMatrixOf(
-    storageStrategy: LowerTriangleStrategy,
+    matrixStrategy: TriangleMatrixStrategy,
     default: T,
     items: Array<T>,
 ): LowerTriangleMatrix<T> {
     return LowerTriangleMatrix.of(
-        storageStrategy = storageStrategy,
+        matrixStrategy = matrixStrategy,
         default = default,
         items = items
     )
@@ -67,12 +65,12 @@ fun <T> lowerTriangleMatrixOf(
 
 @JvmName("lowerTriangleMatrixFromList")
 inline fun <reified T> lowerTriangleMatrixOf(
-    storageStrategy: LowerTriangleStrategy,
+    matrixStrategy: TriangleMatrixStrategy,
     default: T,
     items: List<T>,
 ): LowerTriangleMatrix<T> {
     return lowerTriangleMatrixOf(
-        storageStrategy = storageStrategy,
+        matrixStrategy = matrixStrategy,
         default = default,
         items = items.toTypedArray()
     )
@@ -80,11 +78,11 @@ inline fun <reified T> lowerTriangleMatrixOf(
 
 @JvmName("lowerTriangleMatrixFromVarargs")
 inline fun <reified T> lowerTriangleMatrixOf(
-    storageStrategy: LowerTriangleStrategy,
+    matrixStrategy: TriangleMatrixStrategy,
     default: T,
     vararg items: T,
 ): LowerTriangleMatrix<T> {
-    return lowerTriangleMatrixOf(storageStrategy, default, items.toList())
+    return lowerTriangleMatrixOf(matrixStrategy, default, items.toList())
 }
 
 
