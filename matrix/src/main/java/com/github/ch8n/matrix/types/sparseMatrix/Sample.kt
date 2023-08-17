@@ -8,8 +8,8 @@ internal fun main() {
         columnsCount = 3,
         sparseCoordinate = buildSparseCoordinates {
             append(0, 2, 5)
-            append(2, 2, 8)
-            append(1, 1, 15)
+            append(1, 2, 8)
+            append(1, 0, 15)
         }
     )
 
@@ -28,6 +28,12 @@ internal fun main() {
     }
 
     println(sparseMatrix2)
+
+    println("=========")
+    println("sum matrix1+matrix2")
+    val sum = sparseMatrix1 + sparseMatrix2
+    println(sum)
+
 }
 
 
