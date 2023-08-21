@@ -43,7 +43,7 @@ class SymmetricMatrix<T> private constructor(
     }
 
     private fun getIndex(row: Int, col: Int): Int = when (selectionStrategy) {
-        SymmetricSelectionStrategy.LowerTriangle -> ((row * (row + 1)) / 2) + col
+        SymmetricSelectionStrategy.LowerTriangle -> col * rowsCount - (col * (col + 1) / 2) + row
         SymmetricSelectionStrategy.UpperTriangle -> row * rowsCount - (row * (row + 1) / 2) + col
     }
 
