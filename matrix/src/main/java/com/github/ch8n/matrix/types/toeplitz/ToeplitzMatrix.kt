@@ -3,6 +3,7 @@ package com.github.ch8n.matrix.types.toeplitz
 import com.github.ch8n.matrix.core.MatrixOperations
 import com.github.ch8n.matrix.types.symmetric.SymmetricMatrix
 import com.github.ch8n.matrix.types.symmetric.SymmetricSelectionStrategy
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 
@@ -27,9 +28,10 @@ import kotlin.math.sqrt
  *  1,2,3,4 | 5,6,7
  *
  *  upper matrix
- *  01 -> 2 -> 1 -> col - row
- *  13 -> 3 -> 2 -> col - row
- *  row <= col -> col - row
+ *  00 -> 1 -> 0 -> row - col
+ *  10 -> 2 -> 1 -> row - col
+ *  30 -> 4 -> 3 -> row - col
+ *  row <= col -> row - col
  *
  *  lower matrix
  *  12 -> 5 -> 4 -> 3 + 2 - 1  -> (rowCount - 1) + (col - row)
@@ -42,8 +44,8 @@ class ToeplitzMatrix<T> private constructor(val items: Array<T>) : MatrixOperati
 
     private fun getIndex(row: Int, col: Int): Int {
         return when {
-            /*upper triangle */row <= col -> col - row
-            /*lower triangle */row > col -> (rowsCount - 1) + (col - row)
+            /*upper triangle */row < col -> (rowsCount - 1) + (col - row)
+            /*lower triangle */row >= col -> row - col
             else -> throw IllegalStateException("Element not in lower or upper triangle matrix!")
         }
     }
