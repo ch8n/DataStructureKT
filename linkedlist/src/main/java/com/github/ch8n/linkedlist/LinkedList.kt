@@ -130,4 +130,18 @@ class LinkedListImpl<T> private constructor() : MutableLinkedList<T> {
             this@LinkedListImpl.onEach { add(it) }
         }
     }
+
+    companion object {
+        fun <T> mutableFrom(items: List<T>): MutableLinkedList<T> {
+            val linkedList = LinkedListImpl<T>()
+            linkedList.replaceAll(items)
+            return linkedList
+        }
+
+        fun <T> from(items: List<T>): LinkedList<T> {
+            val linkedList = LinkedListImpl<T>()
+            linkedList.replaceAll(items)
+            return linkedList
+        }
+    }
 }

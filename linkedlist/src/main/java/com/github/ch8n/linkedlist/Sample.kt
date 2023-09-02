@@ -1,46 +1,62 @@
 package com.github.ch8n.linkedlist
 
 fun main() {
-    val linkedList = LinkedListImpl<Int>(1, 2, 3, 4, 5) as MutableLinkedList<Int>
+    val linkedList = linkedListOf(1, 2, 3, 4, 5)
 
-    val firstLink = linkedList.firstLinkOrNull
-    println(firstLink)
+    val first = linkedList.firstOrNull
+    println(first)
 
-    val lastLink = linkedList.lastLinkOrNull
-    println(lastLink)
+    val last = linkedList.lastOrNull
+    println(last)
 
-    val item3 = linkedList.getLinkOrNull(3)
+    val item3 = linkedList.getOrNull(3)
     println(item3)
 
-    linkedList.insertAt(0, 9)
-    linkedList.insertAt(2, 99)
-    linkedList.insertAt(linkedList.lastPosition, 999)
 
     buildString {
-        linkedList.eachLink {
-            append(it)
-            append(",")
-        }
-    }.also(::println)
-
-    linkedList.replaceAll((0..5).toList())
-
-    buildString {
-        linkedList.eachLink {
-            append(it)
-            append(",")
-        }
-    }.also(::println)
-
-
-    linkedList.insertAll((6..12).toList())
-
-    buildString {
-        linkedList.eachLink {
+        linkedList.onEach {
             append(it)
             append(",")
         }
     }.also(::println)
 
     linkedList.snapShot().joinToString().also(::println)
+
+
+    val mutableLinkedList = mutableLinkedListOf(1, 2, 3, 4, 5)
+
+    val firstLink = mutableLinkedList.firstLinkOrNull
+    println(firstLink)
+
+    val lastLink = mutableLinkedList.lastLinkOrNull
+    println(lastLink)
+
+    val item3Link = mutableLinkedList.getLinkOrNull(3)
+    println(item3Link)
+
+
+    buildString {
+        mutableLinkedList.eachLink {
+            append(it)
+            append(",")
+        }
+    }.also(::println)
+
+    mutableLinkedList.insertAll(listOf(9,8,7))
+
+    buildString {
+        mutableLinkedList.eachLink {
+            append(it)
+            append(",")
+        }
+    }.also(::println)
+
+    mutableLinkedList.replaceAll(listOf(9,99,999))
+
+    buildString {
+        mutableLinkedList.eachLink {
+            append(it)
+            append(",")
+        }
+    }.also(::println)
 }
