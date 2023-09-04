@@ -8,7 +8,7 @@ interface MutableLinkedList<T> : LinkedList<T> {
     val lastLinkOrNull: Link<T>?
 
     fun getLinkOrNull(position: Int): Link<T>?
-    fun insertAt(position: Int, value: T)
+    override fun insertAt(position: Int, value: T)
     fun replaceAt(position: Int, value: T)
     fun insertAll(list: List<T>)
     fun replaceAll(list: List<T>)
@@ -23,6 +23,7 @@ interface LinkedList<T> {
     val lastOrNull: T?
 
     val size: Int
+    fun insertAt(position: Int, value: T)
 
     val lastPosition: Int
     fun isEmpty(): Boolean

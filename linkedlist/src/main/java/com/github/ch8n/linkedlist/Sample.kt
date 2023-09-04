@@ -42,7 +42,7 @@ fun main() {
         }
     }.also(::println)
 
-    mutableLinkedList.insertAll(listOf(9,8,7))
+    mutableLinkedList.insertAll(listOf(9, 8, 7))
 
     buildString {
         mutableLinkedList.eachLink {
@@ -51,7 +51,7 @@ fun main() {
         }
     }.also(::println)
 
-    mutableLinkedList.replaceAll(listOf(9,99,999))
+    mutableLinkedList.replaceAll(listOf(9, 99, 999))
 
     buildString {
         mutableLinkedList.eachLink {
@@ -59,4 +59,19 @@ fun main() {
             append(",")
         }
     }.also(::println)
+
+    println("==== LinkedList Sum ====")
+    val linkedList1 = linkedListOf(1, 2, 3, 4, 5)
+    linkedList.snapShot().joinToString(",").also(::println)
+    println("sum -> ${linkedList1.sum()}")
+    println("max -> ${linkedList1.maxOrNull()}")
+    println("Position Of 3 -> ${linkedList1.findPositionOf(3)}")
+
+    println("==== MutableLinkedList Sum ====")
+    val mutableLinkedList1 = mutableLinkedListOf(1, 2, 3, 4, 5)
+    mutableLinkedList1.snapShot().joinToString(",").also(::println)
+    println("sum -> ${mutableLinkedList1.sum()}")
+    println("max -> ${mutableLinkedList1.maxOrNull()}")
+    println("Link Of 3 -> ${mutableLinkedList1.findLinkOrNull(3)}")
+
 }
