@@ -8,7 +8,7 @@ interface MutableLinkedList<T> : LinkedList<T> {
     val lastLinkOrNull: Link<T>?
 
     fun getLinkOrNull(position: Int): Link<T>?
-    override fun insertAt(position: Int, value: T)
+    override fun insertAt(index: Int, value: T)
     fun replaceAt(position: Int, value: T)
     fun insertAll(list: List<T>)
     fun replaceAll(list: List<T>)
@@ -23,9 +23,9 @@ interface LinkedList<T> {
     val lastOrNull: T?
 
     val size: Int
-    fun insertAt(position: Int, value: T)
+    fun insertAt(index: Int, value: T)
 
-    val lastPosition: Int
+    val lastIndex: Int
     fun isEmpty(): Boolean
     fun getOrNull(position: Int): T?
     fun onEach(iteration: (item: T) -> Unit)
@@ -46,7 +46,7 @@ class LinkedListImpl<T> private constructor() : MutableLinkedList<T> {
     override val lastLinkOrNull: Link<T>?
         get() {
             var current = head
-            repeat(lastPosition) { current = current?.next }
+            repeat(lastIndex) { current = current?.next }
             return current
         }
 
@@ -62,18 +62,26 @@ class LinkedListImpl<T> private constructor() : MutableLinkedList<T> {
         return getLinkOrNull(position)?.value
     }
 
-    override fun insertAt(position: Int, value: T) {
-        check(position in 0..lastPosition) { IllegalAccessException("Invalid position") }
+    override fun insertAt(index: Int, value: T) {
+        check(index in 0..lastIndex) { IllegalAccessException("Invalid position") }
+
+        if (index == 0) {
+            val newLink = Link(value)
+            newLink.next = head
+            head = newLink
+            return
+        }
+
         var current = head
-        repeat(position) { current = current?.next }
-        val currentNext = current?.next
+        (1..index).forEach { _ -> current = current?.next }
         val newLink = Link(value)
-        newLink.next = currentNext
+        val next = current?.next
+        newLink.next = next
         current?.next = newLink
     }
 
     override fun replaceAt(position: Int, value: T) {
-        check(position in 0..lastPosition) { IllegalAccessException("Invalid position") }
+        check(position in 0..lastIndex) { IllegalAccessException("Invalid position") }
         var current = head
         repeat(position) { current = current?.next }
         current?.value = value
@@ -92,7 +100,7 @@ class LinkedListImpl<T> private constructor() : MutableLinkedList<T> {
 
     override fun insertAll(list: List<T>) {
         var current = head
-        repeat(lastPosition) { current = current?.next }
+        repeat(lastIndex) { current = current?.next }
         list.forEach { item ->
             val newLink = Link(item)
             current?.next = newLink
@@ -100,7 +108,7 @@ class LinkedListImpl<T> private constructor() : MutableLinkedList<T> {
         }
     }
 
-    override val lastPosition get() = size - 1
+    override val lastIndex get() = size - 1
 
     override val size: Int
         get() {
