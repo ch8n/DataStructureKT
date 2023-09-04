@@ -9,7 +9,8 @@ interface MutableLinkedList<T> : LinkedList<T> {
 
     fun getLinkOrNull(position: Int): Link<T>?
     override fun insertAt(index: Int, value: T)
-    fun replaceAt(position: Int, value: T)
+    override fun replaceAt(index: Int, value: T)
+    override fun deleteAt(index: Int)
     fun insertAll(list: List<T>)
     fun replaceAll(list: List<T>)
     fun eachLink(iteration: (link: Link<T>) -> Unit)
@@ -24,6 +25,8 @@ interface LinkedList<T> {
 
     val size: Int
     fun insertAt(index: Int, value: T)
+    fun replaceAt(index: Int, value: T)
+    fun deleteAt(index: Int)
 
     val lastIndex: Int
     fun isEmpty(): Boolean
@@ -80,11 +83,29 @@ class LinkedListImpl<T> private constructor() : MutableLinkedList<T> {
         current?.next = newLink
     }
 
-    override fun replaceAt(position: Int, value: T) {
-        check(position in 0..lastIndex) { IllegalAccessException("Invalid position") }
+    override fun replaceAt(index: Int, value: T) {
+        check(index in 0..lastIndex) { IllegalAccessException("Invalid position") }
         var current = head
-        repeat(position) { current = current?.next }
+        repeat(index) { current = current?.next }
         current?.value = value
+    }
+
+    override fun deleteAt(index: Int) {
+        check(index in 0..lastIndex) { IllegalAccessException("Invalid position") }
+
+        if (index == 0) {
+            val next = head?.next
+            head = next
+            return
+        }
+
+        var current: Link<T>? = head
+        var previous: Link<T>? = null
+        repeat(index) {
+            previous = current
+            current = current?.next
+        }
+        previous?.next = current?.next
     }
 
     override fun replaceAll(list: List<T>) {

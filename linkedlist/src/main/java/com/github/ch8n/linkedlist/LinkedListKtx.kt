@@ -46,6 +46,10 @@ fun LinkedList<Int>.maxOrNull(): Int? {
     return max
 }
 
+fun LinkedList<Int>.sort() {
+    if (isEmpty()) return
+}
+
 fun MutableLinkedList<Int>.sum(): Int {
     var current = firstLinkOrNull
     var sum = 0
