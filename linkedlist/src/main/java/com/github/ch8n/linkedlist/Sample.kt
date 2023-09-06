@@ -102,7 +102,10 @@ fun main() {
     println("delete @ 2 -> ${mutableLinkedList1.deleteAt(2)} result -> ${mutableLinkedList1.snapShot()}")
 
     val mutableLinkedList2 = mutableLinkedListOf(1, 3, 4, 2, 9, 8)
+    println("isSorted ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.isSorted()}")
     println("sort ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.sort()} result -> ${mutableLinkedList2.snapShot()}")
+    println("isSorted ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.isSorted()}")
+
 
 
 

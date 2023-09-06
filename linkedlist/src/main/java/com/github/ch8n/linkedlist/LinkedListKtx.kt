@@ -68,6 +68,20 @@ fun MutableLinkedList<Int>.maxOrNull(): Int? {
     return max
 }
 
+fun MutableLinkedList<Int>.isSorted(): Boolean {
+    if (isEmpty()) return true
+    var current: Link<Int>? = firstLinkOrNull
+    var next = current?.next
+    while (next != null) {
+        val currentValue = current?.value ?: Int.MIN_VALUE
+        val nextValue = next?.value ?: Int.MIN_VALUE
+        if (currentValue > nextValue) return false
+        current = next
+        next = current.next
+    }
+    return true
+}
+
 fun MutableLinkedList<Int>.sort() {
     if (isEmpty()) return
     var current: Link<Int>? = firstLinkOrNull
