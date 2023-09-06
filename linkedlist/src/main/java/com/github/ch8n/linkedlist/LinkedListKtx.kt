@@ -122,6 +122,25 @@ fun MutableLinkedList<Int>.insertSorted(value: Int) {
     }
 }
 
+
+fun MutableLinkedList<Int>.uniqueSorted() {
+    if (!isSorted()) throw IllegalStateException("LinkedList isn't sorted!")
+
+    var current = firstLinkOrNull
+    var next = current?.next
+    while (next != null) {
+        val currentValue = current?.value ?: Int.MIN_VALUE
+        val nextValue = next.value
+        if (currentValue == nextValue) {
+            current?.next = next.next
+        } else {
+            current = next
+        }
+        next = current?.next
+    }
+}
+
+
 fun MutableLinkedList<Int>.sort() {
     if (isEmpty()) return
     var current: Link<Int>? = firstLinkOrNull

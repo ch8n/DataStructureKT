@@ -110,13 +110,12 @@ fun main() {
     println("Sorted insert ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.insertSorted(3)} result -> ${mutableLinkedList2.snapShot()}")
     println("Sorted insert ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.insertSorted(10)} result -> ${mutableLinkedList2.snapShot()}")
 
+    println("Delete @ 0 ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.deleteAt(0)} result -> ${mutableLinkedList2.snapShot()}")
+    println("Delete @ 2 ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.deleteAt(2)} result -> ${mutableLinkedList2.snapShot()}")
+    println("Delete @ 7 ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.deleteAt(6)} result -> ${mutableLinkedList2.snapShot()}")
 
 
-
-
-
-
-
-
+    val mutableLinkedList3 = mutableLinkedListOf(1, 1, 2, 3, 3, 4, 5, 9, 9)
+    println("remove duplicated from sorted ${mutableLinkedList3.snapShot()} -> ${mutableLinkedList3.uniqueSorted()} result -> ${mutableLinkedList3.snapShot()}")
 
 }
