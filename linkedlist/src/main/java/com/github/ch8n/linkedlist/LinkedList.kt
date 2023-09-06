@@ -142,7 +142,7 @@ class LinkedListImpl<T> private constructor() : MutableLinkedList<T> {
             return interations
         }
 
-    override fun isEmpty() = head != null
+    override fun isEmpty() = head == null
     override fun eachLink(iteration: (link: Link<T>) -> Unit) {
         var current: Link<T>? = head
         while (current != null) {

@@ -46,9 +46,6 @@ fun LinkedList<Int>.maxOrNull(): Int? {
     return max
 }
 
-fun LinkedList<Int>.sort() {
-    if (isEmpty()) return
-}
 
 fun MutableLinkedList<Int>.sum(): Int {
     var current = firstLinkOrNull
@@ -69,4 +66,30 @@ fun MutableLinkedList<Int>.maxOrNull(): Int? {
         current = current.next
     }
     return max
+}
+
+fun MutableLinkedList<Int>.sort() {
+    if (isEmpty()) return
+    var current: Link<Int>? = firstLinkOrNull
+    var next: Link<Int>? = current?.next
+
+    while (current != null) {
+
+        if (next == null) {
+            current = current.next
+            next = current?.next
+            continue
+        }
+
+        val currentValue = current.value
+        val nextValue = next.value
+
+        if (currentValue < nextValue) {
+            next = next.next
+        } else {
+            current.value = nextValue
+            next.value = currentValue
+        }
+
+    }
 }
