@@ -106,6 +106,10 @@ fun main() {
     println("sort ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.sort()} result -> ${mutableLinkedList2.snapShot()}")
     println("isSorted ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.isSorted()}")
 
+    println("Sorted insert ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.insertSorted(0)} result -> ${mutableLinkedList2.snapShot()}")
+    println("Sorted insert ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.insertSorted(3)} result -> ${mutableLinkedList2.snapShot()}")
+    println("Sorted insert ${mutableLinkedList2.snapShot()} -> ${mutableLinkedList2.insertSorted(10)} result -> ${mutableLinkedList2.snapShot()}")
+
 
 
 

@@ -82,6 +82,46 @@ fun MutableLinkedList<Int>.isSorted(): Boolean {
     return true
 }
 
+fun MutableLinkedList<Int>.insertSorted(value: Int) {
+    if (!isSorted()) throw IllegalStateException("LinkedList isn't sorted!")
+
+    // check for head location swapping
+    val head: Link<Int>? = firstLinkOrNull
+    val headValue = head?.value ?: Int.MIN_VALUE
+    if (value <= headValue) {
+        val nextLink = firstLinkOrNull?.next
+        val currentLink = Link(headValue)
+        currentLink.next = nextLink
+        firstLinkOrNull?.value = value
+        firstLinkOrNull?.next = currentLink
+        return
+    }
+
+    // check for other places
+    var current = firstLinkOrNull
+    var next = current?.next
+
+    while (next != null) {
+        val currentValue = current?.value ?: Int.MIN_VALUE
+        val nextValue = next.value
+        if (value in currentValue..nextValue) {
+            val newLink = Link(value)
+            newLink.next = next
+            current?.next = newLink
+            return
+        }
+        current = next
+        next = current.next
+    }
+
+    // check for last places
+    val lastValue = current?.value ?: Int.MIN_VALUE
+    if (lastValue < value) {
+        val newLink = Link(value)
+        current?.next = newLink
+    }
+}
+
 fun MutableLinkedList<Int>.sort() {
     if (isEmpty()) return
     var current: Link<Int>? = firstLinkOrNull
